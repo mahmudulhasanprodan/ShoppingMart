@@ -10,34 +10,58 @@ import { IoLogInSharp } from "react-icons/io5";
 const TopHeader = () => {
   return (
     <>
-      <div className="bg-TopHColor border-[1px] border-gray-400">
+      <div className="bg-TopHColor border-[1px] border-gray-400 hidden md:block px-4">
         <div className="container">
           <div className="flex items-center justify-between py-3">
             <Flex className={"items-center gap-x-3"}>
               <div className="flex items-center gap-x-2 cursor-pointer">
-                <span className="text-iconColor text-md"><FaLocationDot /></span>
-                <p className="font-Montserrat text-xs font-normal">669/2,Middle Monipur,Dhaka-1260</p>
+                <span className="text-iconColor text-md">
+                  <FaLocationDot />
+                </span>
+                <p className="font-Montserrat text-xs font-normal">
+                  669/2,Middle Monipur,Dhaka-1260
+                </p>
+              </div>
+              <div className="hidden lg:block">
+                <div className="flex items-center gap-x-2 cursor-pointer">
+                  <span className="text-iconColor text-md">
+                    <FaPhone />
+                  </span>
+                  <p className="font-Montserrat text-xs font-normal">
+                    01316625624
+                  </p>
+                </div>
               </div>
               <div className="flex items-center gap-x-2 cursor-pointer">
-                <span className="text-iconColor text-md"><FaPhone /></span>
-                <p className="font-Montserrat text-xs font-normal">01316625624</p>
+                <span className="text-iconColor text-md">
+                  <IoMdMail />
+                </span>
+                <p className="font-Montserrat text-xs font-normal">
+                  mahmudulhasan8627@gmail.com
+                </p>
               </div>
-              <div className="flex items-center gap-x-2 cursor-pointer">
-                <span  className="text-iconColor text-md"><IoMdMail /></span>
-                <p className="font-Montserrat text-xs font-normal">mahmudulhasan8627@gmail.com</p>
-              </div>
-              <div className="flex items-center gap-x-2 cursor-pointer">
-                <span  className="text-iconColor text-base"><RiSkypeFill /></span>
-                <p className="font-Montserrat text-xs font-normal">mahmudulhasan</p>
+              <div className="hidden lg:block">
+                <div className="flex items-center gap-x-2 cursor-pointer">
+                  <span className="text-iconColor text-base">
+                    <RiSkypeFill />
+                  </span>
+                  <p className="font-Montserrat text-xs font-normal">
+                    mahmudulhasan
+                  </p>
+                </div>
               </div>
             </Flex>
             <Flex className={"items-center gap-x-3"}>
               <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
-                <span className="text-iconColor text-md"><RiAccountBox2Fill /></span>
+                <span className="text-iconColor text-md">
+                  <RiAccountBox2Fill />
+                </span>
                 <p>My Account</p>
               </div>
               <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
-                <span className="text-iconColor text-md"><IoLogInSharp /></span>
+                <span className="text-iconColor text-md">
+                  <IoLogInSharp />
+                </span>
                 <p>Login</p>
               </div>
             </Flex>
