@@ -10,7 +10,7 @@ import { IoLogInSharp } from "react-icons/io5";
 const TopHeader = () => {
   return (
     <>
-      <div className="bg-TopHColor border-[1px] border-gray-400 hidden md:block px-4">
+      <div className="bg-TopHColor hidden md:block px-4">
         <div className="container">
           <div className="flex items-center justify-between py-3">
             <Flex className={"items-center gap-x-3"}>
