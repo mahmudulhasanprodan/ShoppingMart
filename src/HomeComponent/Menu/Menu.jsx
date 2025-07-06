@@ -4,6 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineCallSplit } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import Flex from '../../CommonComponent/Flex';
+import { NavLink  } from "react-router-dom";
 
 
 
@@ -22,12 +23,14 @@ const Menu = () => {
                 </span>
                 <h2 className="font-Montserrat text-sm">Home</h2>
               </div>
-              <div div className="flex items-center gap-x-1 cursor-pointer">
-                <span className="text-xs">
-                  <FaShoppingCart />
-                </span>
-                <h2 className="font-Montserrat text-sm">Shop</h2>
-              </div>
+              <NavLink to={"/shop"}>
+                <div div className="flex items-center gap-x-1 cursor-pointer active:text-CommonColor">
+                  <span className="text-xs">
+                    <FaShoppingCart />
+                  </span>
+                  <h2 className="font-Montserrat text-sm">Shop</h2>
+                </div>
+              </NavLink>
               <div div className="flex items-center gap-x-1 cursor-pointer">
                 <span className="text-xs">
                   <BsFillFilePersonFill />

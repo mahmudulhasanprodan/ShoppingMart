@@ -9,11 +9,11 @@ const ShopTop = () => {
       <div className="bg-TopHColor pt-10 pb-10">
         <div className="container">
           <Flex className={"justify-between"}>
-            <div className="w-[930px] bg-white px-4 pt-4 pb-4">
+            <div className="w-full md:w-[930px] bg-TopHColor md:bg-white px-4 pt-4 pb-4">
               <div>
-                <h2 className="font-Montserrat font-semibold text-2xl">Shop</h2>
+                <h2 className="font-Montserrat font-semibold text-2xl text-center md:text-start mb-4 md:mb-0">Shop</h2>
               </div>
-              <Flex className={"items-center justify-between"}>
+              <Flex className={"flex-col md:flex-row gap-y-4 md:gap-y-0 items-center justify-start md:justify-between"}>
                 <div>
                   <p className="font-Montserrat text-sm font-light">
                     Showing 1–16 of 18 results
@@ -55,11 +55,11 @@ const ShopTop = () => {
                   </select>
                 </div>
               </Flex>
-              <div className="mt-16 w-[914px]">
+              <div className="mt-16 w-full md:w-[914px]">
                 <ShopBottom />
               </div>
             </div>
-            <div>
+            <div className="hidden md:block">
               <ShopRight />
             </div>
           </Flex>

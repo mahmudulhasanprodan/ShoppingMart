@@ -12,7 +12,7 @@ import { FaGithubSquare } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <div className="py-10 bg-TopHColor">
+      <div className="bg-gray-200 py-20">
         <div className="container">
             <Flex className={"justify-between flex-col md:flex-row gap-y-6 md:gap-y-0 px-4 md-px-0"}>
                 <div>
