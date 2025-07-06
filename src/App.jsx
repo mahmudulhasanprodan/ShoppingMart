@@ -3,6 +3,7 @@ import Home from './Pages/Home/Home'
 import Shop from './Pages/Shop/Shop';
 import Contact from './Pages/Contact/Contact';
 import RootLayout from './RootLayout/RootLayout';
+import Cart from './Pages/Cart/Cart';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
      <Route index element={<Home />}></Route>
     <Route path="/shop" element={<Shop />}></Route>
     <Route path="/contact" element={<Contact />}></Route>
+    <Route path="/cart" element={<Cart />}></Route>
    </Route>
    )
 )
