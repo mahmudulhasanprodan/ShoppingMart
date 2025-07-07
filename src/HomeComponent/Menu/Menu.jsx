@@ -17,14 +17,19 @@ const Menu = () => {
         <div className="container">
           <div className="hidden md:block">
             <Flex className={"items-center gap-x-10 py-3"}>
-              <div className="flex items-center gap-x-1 cursor-pointer">
-                <span className="text-sm">
-                  <IoMdHome />
-                </span>
-                <h2 className="font-Montserrat text-sm">Home</h2>
-              </div>
+              <NavLink to={"/"}>
+                <div className="flex items-center gap-x-1 cursor-pointer">
+                  <span className="text-sm">
+                    <IoMdHome />
+                  </span>
+                  <h2 className="font-Montserrat text-sm">Home</h2>
+                </div>
+              </NavLink>
               <NavLink to={"/shop"}>
-                <div div className="flex items-center gap-x-1 cursor-pointer active:text-CommonColor">
+                <div
+                  div
+                  className="flex items-center gap-x-1 cursor-pointer active:text-CommonColor"
+                >
                   <span className="text-xs">
                     <FaShoppingCart />
                   </span>

@@ -4,7 +4,14 @@ import { FaRegHeart } from "react-icons/fa";
 import Flex from "../../CommonComponent/Flex"
 
 
-const Card = ({FeatueImage,Title,Price,MainPrice}) => {
+const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct}) => {
+
+// CartProduct Function Start Here
+// const CartProduct = (id) => {
+//   console.log(id);
+  
+// }
+
   return (
     <>
       <div>
@@ -19,14 +26,22 @@ const Card = ({FeatueImage,Title,Price,MainPrice}) => {
             </picture>
           </div>
           <div className="flex flex-col items-center justify-center mt-4">
-            <h2 className="font-Montserrat font-light text-md">{Title ? Title : "Title Missing"}</h2>
+            <h2 className="font-Montserrat font-light text-md">
+              {Title ? Title : "Title Missing"}
+            </h2>
             <p className="font-Montserrat text-md mt-2 text-CommonColor font-semibold">
-              {Price} <del className="text-gray-400">{MainPrice ? MainPrice : "$30.00"}</del>
+              {Price}{" "}
+              <del className="text-gray-400">
+                {MainPrice ? MainPrice : "$30.00"}
+              </del>
             </p>
           </div>
           <Flex className={"justify-center mt-4"}>
             <div>
-              <button className="px-3 py-1 border-[1px] border-gray-400 flex items-center gap-x-2 font-Montserrat hover:bg-CommonColor hover:text-white">
+              <button
+                className="px-3 py-1 border-[1px] border-gray-400 flex items-center gap-x-2 font-Montserrat hover:bg-CommonColor hover:text-white"
+                onClick={CartProduct}
+              >
                 <span>
                   <GrBasket />
                 </span>

@@ -4,6 +4,7 @@ import Flex from '../../../CommonComponent/Flex';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { ProductData } from '../../../Redux/ProductSlice/ProductSlice';
+import { Link } from 'react-router-dom';
 
 const ShopBottom = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,8 @@ useEffect(() => {
     setallData(FetchData.data.products);  
   }
   DataFetcher();
-});
+},[]);
+
 
 
   return (
@@ -29,14 +31,20 @@ useEffect(() => {
             }
           >
             {allData?.map((item) => (
-              <div key={item.id}>
-                <Card
-                  FeatueImage={item.thumbnail}
-                  Title={`${item.title.slice(0, 16)}....`}
-                  MainPrice={`$${Math.round(item.price)}`}
-                  Price={`${Math.round(item.price)-Math.round(item.price)*(Math.round(item.discountPercentage)/100)}`}
-                />
-              </div>
+              <Link to={`/productdetails/${item.id}`}>
+                <div key={item.id}>
+                  <Card
+                    FeatueImage={item.thumbnail}
+                    Title={`${item.title.slice(0, 16)}....`}
+                    MainPrice={`$${Math.round(item.price)}`}
+                    Price={`${
+                      Math.round(item.price) -
+                      Math.round(item.price) *
+                        (Math.round(item.discountPercentage) / 100)
+                    }`}
+                  />
+                </div>
+              </Link>
             ))}
           </Flex>
         </div>

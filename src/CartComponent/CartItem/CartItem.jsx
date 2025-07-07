@@ -2,7 +2,13 @@ import React from 'react'
 import Flex from "../../CommonComponent/Flex"
 import CartTotal from './CarTotal/CartTotal';
 import CartProducts from '../CartProducts/CartProducts';
+
+
+
+
 const CartItem = () => {
+
+
   return (
     <>
       <div className="bg-TopHColor">
@@ -28,30 +34,6 @@ const CartItem = () => {
               </Flex>
               {/* Cart Product Item Is Here */}
               <div className="h-[800px] md:h-[400px] md:overflow-y-scroll">
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
-                <div>
-                  <CartProducts />
-                </div>
                 <div>
                   <CartProducts />
                 </div>
