@@ -4,6 +4,7 @@ import pic from "../../assets/HomeComponentpic/featurepic.jpg"
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { useSelector, useDispatch } from 'react-redux'
+import { RemoveItem,Increment,Decrement } from '../../Redux/CartSlice/CartSlice';
 
 const CartProducts = (CartImage,CartTitle,Price,) => {
 const dispatch = useDispatch();
@@ -11,15 +12,32 @@ const dispatch = useDispatch();
 
 const {CartProduct}= useSelector((state) => state.Cart);
 
-console.log(CartProduct);
 
+// HandleRemove Function Start Here
+const HandleRemove = (item) => {
+ dispatch(RemoveItem(item))
+};
+
+// HandleIncrement Function Start Here
+const HandleIncrement = (item) => {
+    dispatch(Increment(item))
+       
+};
+// HandleDecrement Function Start Here
+const HandleDecrement = (item) => {
+  dispatch(Decrement(item))
+}
 
   return (
     <>
       <div className="pb-4">
         {CartProduct?.map((item) => (
           <div key={item.id}>
-            <Flex className={"items-center justify-between md:justify-start border-b-[1px] py-2"}>
+            <Flex
+              className={
+                "items-center justify-between md:justify-start border-b-[1px] py-2"
+              }
+            >
               <div className="flex items-center basis-1/3 pl-3 font-Montserrat font-semibold">
                 <picture>
                   <img
@@ -29,27 +47,36 @@ console.log(CartProduct);
                   />
                 </picture>
                 <h2 className="font-Montserrat text-xs  md:text-base pl-3">
-                 {item.title ? item.title : "Title Missing"}
+                  {item.title ? item.title : "Title Missing"}
                 </h2>
               </div>
-              <div className="basis-1/4 pl-3 font-Montserrat font-semibold hidden md:block">
-                <p>{item.price ? `${Math.round(item.price)}` : "$30.00"}</p>
+              <div className="basis-1/4 pl-3 font-Montserrat font-semibold hidden text-CommonColor md:block">
+                <p>{item.price ? `$${Math.round(item.price)}` : "$30.00"}</p>
               </div>
 
               <div className="basis-1/4 pl-3 font-Montserrat font-semibold py-4 flex items-center gap-x-3">
-                <span className="cursor-pointer  md:font-bold border-2 md:px-2 md:py-1 border-gray-500">
+                <span
+                  className="cursor-pointer  md:font-bold border-2 md:px-2 md:py-1 border-gray-500 active:bg-CommonColor active:text-white"
+                  onClick={() => HandleDecrement(item)}
+                >
                   <FaMinus />
                 </span>
                 <p className="font-Montserrat font-bold text-sm md:text-xl">
                   {item.CartQuantity}
                 </p>
-                <span className="cursor-pointer font-bold border-2 md:px-2 md:py-1 border-gray-500">
+                <span
+                  className="cursor-pointer font-bold border-2 md:px-2 md:py-1 border-gray-500 active:bg-CommonColor active:text-white"
+                  onClick={() => HandleIncrement(item)}
+                >
                   <FaPlus />
                 </span>
               </div>
-              <div className="basis-1/4 pl-3 font-Montserrat font-thin text-xs  md:font-semibold relative flex">
-                <h3>{item.price * item.CartQuantity}</h3>
-                <p className="absolute right-3 cursor-pointer text-red-500 text-xl">
+              <div className="basis-1/4 pl-3 font-Montserrat font-thin text-md  md:font-semibold relative flex">
+                <h3>{`$${Math.round(item.price * item.CartQuantity)}`}</h3>
+                <p
+                  className="absolute right-3 cursor-pointer text-red-500 text-xl"
+                  onClick={() => HandleRemove(item)}
+                >
                   X
                 </p>
               </div>

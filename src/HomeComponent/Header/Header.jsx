@@ -10,17 +10,19 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineCallSplit } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
-
+import { useSelector, useDispatch } from 'react-redux'
 
 
 const Header = () => {
  const[menuItem,setmenuItem] = useState(false);
+ const dispatch = useDispatch();
 
 // HandlemenuItem Function Start Here
 
 const HandleMenuItem = () => {
    setmenuItem(!menuItem);
 };
+
 
 
 
@@ -57,11 +59,17 @@ const HandleMenuItem = () => {
               <Flex className={"items-center gap-x-5"}>
                 <div className="hidden md:block">
                   <div className="flex items-center gap-x-4">
-                    <span className="text-xl cursor-pointer font-bold">
+                    <span className="text-xl cursor-pointer font-bold relative">
                       <FaRegHeart />
+                       <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">1</h3>
+                      </div>
                     </span>
-                    <span className="text-2xl cursor-pointer font-bold">
+                    <span className="text-2xl cursor-pointer font-bold relative">
                       <LuShoppingBasket />
+                      <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">1</h3>
+                      </div>
                     </span>
                   </div>
                 </div>
