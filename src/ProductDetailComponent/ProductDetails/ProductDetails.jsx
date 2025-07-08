@@ -33,7 +33,6 @@ const{CartItem}=useSelector((state) => state.Product);
 // HandleCart Function Start Here
 const HandleCart = () => {
    dispatch(AllCartItem(CartItem))
-   Navigate("/cart")
 };
 
 

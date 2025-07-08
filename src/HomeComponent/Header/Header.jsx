@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState} from 'react'
 import { FaShopify } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingBasket } from "react-icons/lu";
@@ -11,7 +11,8 @@ import { MdOutlineCallSplit } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector, useDispatch } from 'react-redux'
-
+import { GetTotal } from '../../Redux/CartSlice/CartSlice';
+import CartMenu from '../../CartComponent/CartMenu/CartMenu';
 
 const Header = () => {
  const[menuItem,setmenuItem] = useState(false);
@@ -24,7 +25,11 @@ const HandleMenuItem = () => {
 };
 
 
+const{CartProduct,TotalItem,TotalAmount}=useSelector((state) => state.Cart);
 
+useEffect(() => {
+  dispatch(GetTotal())
+},[dispatch,CartProduct]);
 
   return (
     <>
@@ -62,13 +67,16 @@ const HandleMenuItem = () => {
                     <span className="text-xl cursor-pointer font-bold relative">
                       <FaRegHeart />
                        <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
-                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">1</h3>
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">0</h3>
                       </div>
                     </span>
-                    <span className="text-2xl cursor-pointer font-bold relative">
-                      <LuShoppingBasket />
+                    <span className="cursor-pointer relative">
+                      <LuShoppingBasket className="font-bold text-2xl"/>
                       <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
-                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">1</h3>
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">{TotalItem ? `${TotalItem}` : "0"}</h3>
+                      </div>
+                      <div className="absolute right-0 z-10">
+                        {/* <CartMenu /> */}
                       </div>
                     </span>
                   </div>
@@ -77,7 +85,7 @@ const HandleMenuItem = () => {
                   <h3 className="font-Montserrat text-md font-semibold">
                     Total:
                   </h3>
-                  <p className="font-Montserrat text-sm">$00.00</p>
+                  <p className="font-Montserrat text-sm font-semibold text-CommonColor">{TotalAmount ? `$${TotalAmount}` : "$0.0"}</p>
                 </div>
               </Flex>
 

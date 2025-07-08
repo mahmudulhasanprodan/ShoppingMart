@@ -50,8 +50,8 @@ const HandleDecrement = (item) => {
                   {item.title ? item.title : "Title Missing"}
                 </h2>
               </div>
-              <div className="basis-1/4 pl-3 font-Montserrat font-semibold hidden text-CommonColor md:block">
-                <p>{item.price ? `$${Math.round(item.price)}` : "$30.00"}</p>
+              <div className="basis-1/4 pl-3  hidden text-CommonColor md:block">
+                <p className="font-Montserrat font-semibold pl-3">{item.price ? `$${Math.round(item.price)}` : "$30.00"}</p>
               </div>
 
               <div className="basis-1/4 pl-3 font-Montserrat font-semibold py-4 flex items-center gap-x-3">
@@ -71,8 +71,8 @@ const HandleDecrement = (item) => {
                   <FaPlus />
                 </span>
               </div>
-              <div className="basis-1/4 pl-3 font-Montserrat font-thin text-md  md:font-semibold relative flex">
-                <h3>{`$${Math.round(item.price * item.CartQuantity)}`}</h3>
+              <div className="basis-1/4 pl-3 md:font-semibold relative flex">
+                <h3 className="font-Montserrat pl-5 font-thin text-md ">{`$${Math.round(item.price * item.CartQuantity)}`}</h3>
                 <p
                   className="absolute right-3 cursor-pointer text-red-500 text-xl"
                   onClick={() => HandleRemove(item)}
