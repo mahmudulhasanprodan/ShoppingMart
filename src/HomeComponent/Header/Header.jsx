@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import { FaShopify } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingBasket } from "react-icons/lu";
@@ -16,7 +16,13 @@ import CartMenu from '../../CartComponent/CartMenu/CartMenu';
 
 const Header = () => {
  const[menuItem,setmenuItem] = useState(false);
+ const[ShowcartMenu,setShowcartMenu] =useState(false);
  const dispatch = useDispatch();
+ const CartRef = useRef();
+ 
+ 
+
+ 
 
 // HandlemenuItem Function Start Here
 
@@ -31,9 +37,23 @@ useEffect(() => {
   dispatch(GetTotal())
 },[dispatch,CartProduct]);
 
+// HandleCartMenu Function Start Here
+const HandleCartMenu = () => setShowcartMenu(!ShowcartMenu);
+
+useEffect(() => {
+  window.addEventListener("click", (e) => {
+    if(!CartRef.current.contains(e.target)){
+      setShowcartMenu(false);
+    }
+  })
+},[]);
+
+
+
+
   return (
     <>
-      <div className="bg-TopHColor">
+      <div className="bg-TopHColor" ref={CartRef}>
         <div className="container">
           <div className="flex items-center justify-between py-4 px-4">
             <div className="flex items-center gap-x-1 cursor-pointer">
@@ -66,17 +86,28 @@ useEffect(() => {
                   <div className="flex items-center gap-x-4">
                     <span className="text-xl cursor-pointer font-bold relative">
                       <FaRegHeart />
-                       <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
-                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">0</h3>
+                      <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">
+                          0
+                        </h3>
                       </div>
                     </span>
                     <span className="cursor-pointer relative">
-                      <LuShoppingBasket className="font-bold text-2xl"/>
+                      <LuShoppingBasket
+                        className="font-bold text-2xl"
+                        onClick={HandleCartMenu}
+                      />
                       <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
-                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">{TotalItem ? `${TotalItem}` : "0"}</h3>
+                        <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">
+                          {TotalItem ? `${TotalItem}` : "0"}
+                        </h3>
                       </div>
-                      <div className="absolute right-0 z-10">
-                        {/* <CartMenu /> */}
+                      <div className="absolute right-0 z-10 top-10">
+                        {ShowcartMenu && (
+                          <div>
+                            <CartMenu />
+                          </div>
+                        )}
                       </div>
                     </span>
                   </div>
@@ -85,7 +116,9 @@ useEffect(() => {
                   <h3 className="font-Montserrat text-md font-semibold">
                     Total:
                   </h3>
-                  <p className="font-Montserrat text-sm font-semibold text-CommonColor">{TotalAmount ? `$${TotalAmount}` : "$0.0"}</p>
+                  <p className="font-Montserrat text-sm font-semibold text-CommonColor">
+                    {TotalAmount ? `$${TotalAmount}` : "$0.0"}
+                  </p>
                 </div>
               </Flex>
 
@@ -94,8 +127,7 @@ useEffect(() => {
                   className="text-xl font-bold cursor-pointer"
                   onClick={HandleMenuItem}
                 >
-                  {menuItem ? <RxCross2 className="font-bold"/> :  <FaBars />}
-               
+                  {menuItem ? <RxCross2 className="font-bold" /> : <FaBars />}
                 </span>
                 {/* DropDown Menu */}
                 {menuItem && (
