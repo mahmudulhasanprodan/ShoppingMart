@@ -1,4 +1,5 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify';
 import Home from './Pages/Home/Home'
 import Shop from './Pages/Shop/Shop';
 import Contact from './Pages/Contact/Contact';
@@ -30,6 +31,7 @@ const App = () => {
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
+      <ToastContainer />
     </>
   );
 };

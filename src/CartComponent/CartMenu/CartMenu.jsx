@@ -19,7 +19,7 @@ dispatch(RemoveItem(item))
   return (
     <>
       <div>
-        <div className="w-[300px] min-h-[500px] bg-gray-300 px-2">
+        <div className="w-[300px] min-h-[500px] bg-gray-300 px-2"> 
           <div className="w-full min-h-[350px] max-h-[450px] overflow-y-scroll">
             {CartProduct?.map((item) => (
               <Flex

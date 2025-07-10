@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { SuccessToast } from '../../../Utils/Utils';
 
 const initialState = {
   CartProduct: localStorage.getItem("Cartitem")
@@ -20,9 +20,11 @@ export const CartSLice = createSlice({
        if(FindValue >= 0){
         state.CartProduct[FindValue].CartQuantity += 1;
         localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));
+        SuccessToast(action.payload.title);
        }else{
          state.CartProduct.push({ ...action.payload, CartQuantity: 1 });
           localStorage.setItem("Cartitem",JSON.stringify(state.CartProduct));
+          SuccessToast(action.payload.title);
        }
      },
      RemoveItem: (state,action) => {
@@ -30,7 +32,8 @@ export const CartSLice = createSlice({
            (item) => item.id !== action.payload.id
          );
         (state.CartProduct = remove),
-          localStorage.setItem("Cartitem", JSON.stringify(state.CartProduct));      
+          localStorage.setItem("Cartitem", JSON.stringify(state.CartProduct));  
+
      },
      Increment: (state,action)=> {
        const InDex = state.CartProduct.findIndex(
