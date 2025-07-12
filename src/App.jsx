@@ -9,7 +9,8 @@ import ProductDetails from './ProductDetailComponent/ProductDetails/ProductDetai
 import CheckOut from './Pages/CheckOut/CheckOut';
 import OrderComplete from './Pages/OrderComplete/OrderComplete';
 import Login from './Pages/Login/Login';
-
+import Myaccount from './Pages/MyAccount/Myaccount';
+import Loading from './CommonComponent/Loading/Loading';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -28,6 +29,8 @@ const router = createBrowserRouter(
     <Route path="/checkout" element={<CheckOut />}></Route>
     <Route path="/ordercomplete" element={<OrderComplete />}></Route>
     <Route path="/login" element={<Login />}></Route>
+    <Route path="/myaccount" element={<Myaccount />}></Route>
+    <Route path="/Loading" element={<Loading />}></Route>
    </Route>
    )
 )

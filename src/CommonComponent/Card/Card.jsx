@@ -6,11 +6,7 @@ import Flex from "../../CommonComponent/Flex"
 
 const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct}) => {
 
-// CartProduct Function Start Here
-// const CartProduct = (id) => {
-//   console.log(id);
-  
-// }
+
 
   return (
     <>
