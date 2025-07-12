@@ -7,6 +7,9 @@ import RootLayout from './RootLayout/RootLayout';
 import Cart from './Pages/Cart/Cart';
 import ProductDetails from './ProductDetailComponent/ProductDetails/ProductDetails';
 import CheckOut from './Pages/CheckOut/CheckOut';
+import OrderComplete from './Pages/OrderComplete/OrderComplete';
+import Login from './Pages/Login/Login';
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -23,6 +26,8 @@ const router = createBrowserRouter(
     <Route path="/cart" element={<Cart />}></Route>
     <Route path="/productdetails/:ProductId" element={<ProductDetails />}></Route>
     <Route path="/checkout" element={<CheckOut />}></Route>
+    <Route path="/ordercomplete" element={<OrderComplete />}></Route>
+    <Route path="/login" element={<Login />}></Route>
    </Route>
    )
 )
