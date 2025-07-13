@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BillingForm = ({labelItem,InputType,InputPlaceholder,InputId,InputClass,className,OnChangeItem}) => {
+const BillingForm = ({labelItem,InputType,InputPlaceholder,InputId,InputClass,className,OnChangeItem,ValueForm}) => {
   return (
     <>
       <div className={"flex flex-col gap-y-1"}>
@@ -16,6 +16,7 @@ const BillingForm = ({labelItem,InputType,InputPlaceholder,InputId,InputClass,cl
             id={InputId}
             className={InputClass}
             onChange={OnChangeItem}
+            value={ValueForm}
           />
         </div>
       </div>

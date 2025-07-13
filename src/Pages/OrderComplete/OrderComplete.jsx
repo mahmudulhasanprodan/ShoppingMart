@@ -1,6 +1,7 @@
 import React from 'react'
 import { ImCheckmark } from "react-icons/im";
 import { MdArrowBack } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 
@@ -23,12 +24,14 @@ const OrderComplete = () => {
               </p>
             </div>
             <div>
-              <button className="px-3 py-2 flex items-center gap-x-1 bg-CommonColor text-white font-Montserrat font-light rounded-md">
-                <span>
-                  <MdArrowBack />
-                </span>
-                Back to shop
-              </button>
+              <Link to={"/shop"}>
+                <button className="px-3 py-2 flex items-center gap-x-1 bg-CommonColor text-white font-Montserrat font-light rounded-md">
+                  <span>
+                    <MdArrowBack />
+                  </span>
+                  Back to shop
+                </button>
+              </Link>
             </div>
           </div>
         </div>

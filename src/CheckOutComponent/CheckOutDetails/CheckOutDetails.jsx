@@ -3,10 +3,16 @@ import Flex from '../../CommonComponent/Flex'
 import BillingForm from '../../CommonComponent/BillingForm/BillingForm'
 import OrderHistory from '../OrderHistory/OrderHistory'
 import { CountryName,CityName,DistrictName } from '../../../JsonData/JsonData'
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../../Firebase/FirebaseSDK'
+import { FireBaseDataToast } from '../../../Utils/Utils'
+import { useNavigate } from 'react-router-dom'
 
 
 const CheckOutDetails = () => {
 
+const[loading,setloading]= useState(false)
+const Navigate = useNavigate();
 const[signUpData,setsignUpData] = useState({
   FullName: "",
   EmailId: "",
@@ -55,45 +61,131 @@ const Handlesubmit = () => {
    if(!FullName){
     setsignUpDataError({
       ...signUpDataError,
-      FullNameError: "FullName Missing"
+      EmailIdError: "",
+      NumberError: "",
+      CountryNameError: "",
+      AddressError: "",
+      CityNameError: "",
+      DistrictNameError: "",
+      PostalCodeError: "",
+      FullNameError: "FullName Missing",
     }); 
    }else if(!EmailId){
      setsignUpDataError({
-      ...signUpDataError,
-      EmailIdError: "Email Missing"
-    });
+       ...signUpDataError,
+       FullNameError: "",
+       NumberError: "",
+       CountryNameError: "",
+       AddressError: "",
+       CityNameError: "",
+       DistrictNameError: "",
+       PostalCodeError: "",
+       EmailIdError: "Email Missing",
+     });
    }else if(!Number){
      setsignUpDataError({
-      ...signUpDataError,
-      NumberError: "Number Missing"
-    });
+       ...signUpDataError,
+       FullNameError: "",
+       EmailIdError: "",
+       CountryNameError: "",
+       AddressError: "",
+       CityNameError: "",
+       DistrictNameError: "",
+       PostalCodeError: "",
+       NumberError: "Number Missing",
+     });
    }else if(!CountryName){
      setsignUpDataError({
        ...signUpDataError,
+       FullNameError: "",
+       EmailIdError: "",
+       NumberError: "",
+       AddressError: "",
+       CityNameError: "",
+       DistrictNameError: "",
+       PostalCodeError: "",
        CountryNameError: "Country Missing",
      });
    }else if(!Address){
      setsignUpDataError({
        ...signUpDataError,
+       FullNameError: "",
+       EmailIdError: "",
+       NumberError: "",
+       CountryNameError: "",
+       CityNameError: "",
+       DistrictNameError: "",
+       PostalCodeError: "",
        AddressError: "Address Missing",
      });
    }else if(!CityName){
     setsignUpDataError({
-       ...signUpDataError,
-       CityNameError: "City Missing",
-     });
+      ...signUpDataError,
+      FullNameError: "",
+      EmailIdError: "",
+      NumberError: "",
+      CountryNameError: "",
+      AddressError: "",
+      DistrictNameError: "",
+      PostalCodeError: "",
+      CityNameError: "City Missing",
+    });
    }else if(!DistrictName){
     setsignUpDataError({
-       ...signUpDataError,
-       DistrictNameError: "District Missing",
-     });
+      ...signUpDataError,
+      FullNameError: "",
+      EmailIdError: "",
+      NumberError: "",
+      CountryNameError: "",
+      AddressError: "",
+      CityNameError: "",
+      PostalCodeError: "",
+      DistrictNameError: "District Missing",
+    });
    }else if(!PostalCode){
     setsignUpDataError({
-       ...signUpDataError,
-       PostalCodeError: "Postal Code Missing",
-     });
+      ...signUpDataError,
+      FullNameError: "",
+      EmailIdError: "",
+      NumberError: "",
+      CountryNameError: "",
+      AddressError: "",
+      CityNameError: "",
+      DistrictNameError: "",
+      PostalCodeError: "Postal Code Missing",
+    });
    }else{
-    console.log("Everything is Ok");
+    setsignUpDataError({
+      ...signUpDataError,
+      FullNameError: "",
+      EmailIdError: "",
+      NumberError: "",
+      CountryNameError: "",
+      AddressError: "",
+      CityNameError: "",
+      DistrictNameError: "",
+      PostalCodeError: "",
+    });
+    setloading(true);
+//  Data sending FireStore
+    addDoc(collection(db, "users"),signUpData).then((userCredentsial) => {
+      // FireBaseDataToast(signUpData.FullName);
+      Navigate("/ordercomplete")
+    }).catch((error) => {
+      console.log(error);
+    }).finally(() => {
+      setsignUpData({
+        FullName: "",
+        EmailId: "",
+        Number: "",
+        CountryName: "",
+        CityName: "",
+        Address: "",
+        DistrictName: "",
+        PostalCode: "",
+      });
+      setloading(false)
+    })
     
    }
     
@@ -125,10 +217,18 @@ const Handlesubmit = () => {
                     InputType={"text"}
                     InputPlaceholder={"Enter your full name"}
                     InputId={"FullName"}
-                    InputClass={
-                      "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
-                    }
+                    ValueForm = {signUpData.FullName}
+                    InputClass={` ${
+                      signUpDataError.FullNameError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                    }`}
                   />
+                  {signUpDataError.FullNameError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.FullNameError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <BillingForm
@@ -138,10 +238,17 @@ const Handlesubmit = () => {
                     InputType={"email"}
                     InputPlaceholder={"Enter your email here"}
                     InputId={"EmailId"}
-                    InputClass={
-                      "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
-                    }
+                    InputClass={` ${
+                      signUpDataError.EmailIdError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                    }`}
                   />
+                  {signUpDataError.EmailIdError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.EmailIdError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <BillingForm
@@ -151,10 +258,17 @@ const Handlesubmit = () => {
                     InputType={"number"}
                     InputPlaceholder={"Enter your number here"}
                     InputId={"Number"}
-                    InputClass={
-                      "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
-                    }
+                    InputClass={` ${
+                      signUpDataError.NumberError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                    }`}
                   />
+                  {signUpDataError.NumberError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.NumberError}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label
@@ -166,7 +280,11 @@ const Handlesubmit = () => {
                   <select
                     name="CountryName"
                     id="CountryName"
-                    className="w-96 pl-3 focus:border-CommonColor border-[1px] py-1 mt-2 rounded-md mb-4 cursor-pointer"
+                    className={`${
+                      signUpDataError.CountryNameError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                    }`}
                     onChange={HandleInputChange}
                   >
                     <option value="Select Country">Select City</option>
@@ -176,6 +294,11 @@ const Handlesubmit = () => {
                       </div>
                     ))}
                   </select>
+                  {signUpDataError.CountryNameError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.CountryNameError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <BillingForm
@@ -185,10 +308,17 @@ const Handlesubmit = () => {
                     InputType={"text"}
                     InputPlaceholder={"Enter your Address here"}
                     InputId={"Address"}
-                    InputClass={
-                      "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
-                    }
+                    InputClass={` ${
+                      signUpDataError.AddressError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                    }`}
                   />
+                  {signUpDataError.AddressError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.AddressError}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label
@@ -200,7 +330,11 @@ const Handlesubmit = () => {
                   <select
                     name="CityName"
                     id="CityName"
-                    className="w-96 pl-3 focus:border-CommonColor border-[1px] py-1 mt-2 rounded-md mb-4 cursor-pointer"
+                    className={`${
+                      signUpDataError.CityNameError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                    }`}
                     onChange={HandleInputChange}
                   >
                     <option value="Select Country">Select Country</option>
@@ -210,6 +344,11 @@ const Handlesubmit = () => {
                       </div>
                     ))}
                   </select>
+                  {signUpDataError.CityNameError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.CityNameError}
+                    </p>
+                  )}
                 </div>
                 <div className="flex flex-col">
                   <label
@@ -221,7 +360,11 @@ const Handlesubmit = () => {
                   <select
                     name="DistrictName"
                     id="DistrictName"
-                    className="w-96 pl-3 focus:border-CommonColor border-[1px] py-1 mt-2 rounded-md mb-4 cursor-pointer"
+                    className={`${
+                      signUpDataError.DistrictNameError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                    }`}
                     onChange={HandleInputChange}
                   >
                     <option value="Select Country">Select District</option>
@@ -231,6 +374,11 @@ const Handlesubmit = () => {
                       </div>
                     ))}
                   </select>
+                  {signUpDataError.DistrictNameError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.DistrictNameError}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -241,15 +389,22 @@ const Handlesubmit = () => {
                     InputType={"number"}
                     InputPlaceholder={"Enter your postal code here"}
                     InputId={"PostalCode"}
-                    InputClass={
-                      "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
-                    }
+                    InputClass={` ${
+                      signUpDataError.AddressError
+                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                    }`}
                   />
+                   {signUpDataError.PostalCodeError && (
+                    <p className="text-CommonColor">
+                      {signUpDataError.PostalCodeError}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
             <div className="w-[500px] h-[500px] bg-white">
-              <OrderHistory Onsubmit={Handlesubmit}/>
+              <OrderHistory Onsubmit={Handlesubmit} Loader={loading}/>
             </div>
           </Flex>
         </div>

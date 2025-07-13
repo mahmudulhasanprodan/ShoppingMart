@@ -1,13 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-const OrderHistory = ({Onsubmit}) => {
+const OrderHistory = ({Onsubmit,Loader}) => {
 
   const dispatch = useDispatch();
 
 const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
 
 
+console.log(Loader);
 
 
   return (
@@ -51,9 +52,25 @@ const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
             </p>
           </div>
           <div className="flex items-center justify-center">
-            <button className="w-72 py-2 bg-CommonColor text-white font-Montserrat font-extralight rounded-sm" onClick={Onsubmit}>
-              Place Order
-            </button>
+            {Loader ? (
+              <button
+                type="button"
+                className="bg-indigo-500 w-72 py-2 flex items-center justify-center font-Montserrat text-white font-bold"
+              >
+                <svg
+                  className="animate-spin h-5 w-5 mr-3 border-4 border-white border-b-4 border-b-red-500 rounded-full"
+                  viewBox="0 0 24 24"
+                ></svg>
+                Processing...
+              </button>
+            ) : (
+              <button
+                className="w-72 py-2 bg-CommonColor text-white font-Montserrat font-extralight rounded-sm"
+                onClick={Onsubmit}
+              >
+                Place Order
+              </button>
+            )}
           </div>
         </div>
       </div>
