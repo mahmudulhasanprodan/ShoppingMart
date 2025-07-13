@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-const OrderHistory = () => {
+const OrderHistory = ({Onsubmit}) => {
+
   const dispatch = useDispatch();
 
 const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
@@ -50,7 +51,7 @@ const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
             </p>
           </div>
           <div className="flex items-center justify-center">
-            <button className="w-72 py-2 bg-CommonColor text-white font-Montserrat font-extralight rounded-sm">
+            <button className="w-72 py-2 bg-CommonColor text-white font-Montserrat font-extralight rounded-sm" onClick={Onsubmit}>
               Place Order
             </button>
           </div>

@@ -6,8 +6,12 @@ import { RemoveItem } from '../../Redux/CartSlice/CartSlice'
 import { Link } from 'react-router-dom'
 
 const CartMenu = () => {
+
 const dispatch = useDispatch();
+
 const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
+
+
 
   
 // HandleCartRemove Function Start Her

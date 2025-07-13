@@ -20,6 +20,9 @@ const Header = () => {
  const dispatch = useDispatch();
  const CartRef = useRef();
  
+
+ 
+ 
  
 
  
@@ -43,7 +46,9 @@ const HandleCartMenu = () => setShowcartMenu(!ShowcartMenu);
 useEffect(() => {
   window.addEventListener("click", (e) => {
     if(!CartRef.current.contains(e.target)){
-      setShowcartMenu(false);
+      setShowcartMenu(ShowcartMenu);
+    }else{
+      setShowcartMenu(!ShowcartMenu)
     }
   })
 },[]);

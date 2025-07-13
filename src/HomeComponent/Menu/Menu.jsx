@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { MdOutlineCallSplit } from "react-icons/md";
 import { BsFillFilePersonFill } from "react-icons/bs";
 import Flex from '../../CommonComponent/Flex';
-import { NavLink  } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
 
 
 
@@ -17,12 +17,14 @@ const Menu = () => {
         <div className="container">
           <div className="hidden md:block">
             <Flex className={"items-center gap-x-10 py-3"}>
-              <div className="flex items-center gap-x-1 cursor-pointer">
-                <span className="text-sm">
-                  <IoMdHome />
-                </span>
-                <h2 className="font-Montserrat text-sm">Home</h2>
-              </div>
+              <Link to={"/"}>
+                <div className="flex items-center gap-x-1 cursor-pointer">
+                  <span className="text-sm">
+                    <IoMdHome/>
+                  </span>
+                  <h2 className="font-Montserrat text-sm">Home</h2>
+                </div>
+              </Link>
 
               <NavLink to={"/shop"}>
                 <div

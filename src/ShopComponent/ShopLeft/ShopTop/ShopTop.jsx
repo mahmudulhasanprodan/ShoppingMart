@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Flex from "../../../CommonComponent/Flex"
 import ShopBottom from '../ShopBottom/ShopBottom';
 import ShopRight from '../../ShopRight/ShopRight';
@@ -7,10 +7,19 @@ import { DropdownShowData } from '../../../../JsonData/JsonData';
 
 
 const ShopTop = () => {
+  const[pageItemValue,setpageItemValue] = useState(9)
+
+  //HandleValue Function Start here
+  const HandleValue = (e) => {
+    setpageItemValue(e.target.value); 
+  };
+
+
+  
   
   return (
     <>
-      <div className="bg-TopHColor pt-10 pb-10">
+      <div className="bg-TopHColor pt-10 pb-10 relative">
         <div className="container">
           <Flex className={"justify-between"}>
             <div className="w-full md:w-[930px] bg-TopHColor md:bg-white px-4 pt-4 pb-4">
@@ -21,30 +30,32 @@ const ShopTop = () => {
               </div>
               <Flex
                 className={
-                  "flex-col md:flex-row gap-y-4 md:gap-y-0 items-center justify-start md:justify-between"
+                  "flex-col md:flex-row gap-y-4 md:gap-y-0 items-center justify-start md:justify-end"
                 }
               >
-                <div>
+                {/* <div>
                   <p className="font-Montserrat text-sm font-light">
-                    Showing 1–16 of 18 results
+                    Showing 1–{pageItemValue} of 18 results
                   </p>
-                </div>
+                </div> */}
                 <div>
                   <select
                     name="ProductShorting"
                     id="ProductShorting"
                     className="w-56 border-[1px] cursor-pointer border-gray-400 py-1"
+                    onClick={HandleValue}
                   >
                     <option
-                      value="Select Item"
+                      value="9"
                       className="font-Montserrat text-sm font-light"
                     >
-                      Select Item
+                      Show Item
                     </option>
                     {DropdownShowData?.map((item) => (
                       <option
-                        value="Womens Products"
+                        value={item.product}
                         className="font-Montserrat text-sm font-light"
+                        
                       >
                        {item.product}
                       </option>
@@ -53,7 +64,7 @@ const ShopTop = () => {
                 </div>
               </Flex>
               <div className="mt-16 w-full md:w-[914px]">
-                <ShopBottom />
+                <ShopBottom pageValue={pageItemValue}/>
               </div>
             </div>
             <div className="hidden md:block">

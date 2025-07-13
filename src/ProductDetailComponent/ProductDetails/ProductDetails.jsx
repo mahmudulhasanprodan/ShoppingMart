@@ -8,7 +8,6 @@ import { ProductData } from '../../Redux/ProductSlice/ProductSlice'
 import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 
 
-
 const ProductDetails = () => {
 
 const dispatch = useDispatch();
@@ -36,6 +35,7 @@ const HandleCart = () => {
 };
 
 
+
   return (
     <>
       <div>
@@ -56,12 +56,18 @@ const HandleCart = () => {
             <div className="flex flex-col gap-y-5">
               <div>
                 <h2 className="font-Montserrat font-semibold text-2xl mb-3">
-                  {CartItem.title ? CartItem.title : "Title Missing" }
+                  {CartItem.title ? CartItem.title : "Title Missing"}
                 </h2>
                 <p className="font-Montserrat font-bold text-xl">
-                  ${Math.round(CartItem.price) -
-                      Math.round(CartItem.price) *
-                        (Math.round(CartItem.discountPercentage) / 100)} <del className="text-gray-400">{CartItem.price ? `$${Math.round(CartItem.price)}` : "$30.00"}</del>
+                  $
+                  {Math.round(CartItem.price) -
+                    Math.round(CartItem.price) *
+                      (Math.round(CartItem.discountPercentage) / 100)}{" "}
+                  <del className="text-gray-400">
+                    {CartItem.price
+                      ? `$${Math.round(CartItem.price)}`
+                      : "$30.00"}
+                  </del>
                 </p>
               </div>
               <Flex className={"items-center gap-x-6"}>
@@ -75,7 +81,10 @@ const HandleCart = () => {
                   </span>
                 </div>
                 <div>
-                  <button className="px-6 py-2 bg-CommonColor font-Montserrat text-white text-md font-light" onClick={HandleCart}>
+                  <button
+                    className="px-6 py-2 bg-CommonColor font-Montserrat text-white text-md font-light"
+                    onClick={HandleCart}
+                  >
                     Add To Cart
                   </button>
                 </div>
@@ -87,11 +96,15 @@ const HandleCart = () => {
               </Flex>
               <div className="flex items-center gap-x-2">
                 <h2 className="font-Montserrat font-semibold">Catagories:</h2>
-                <p className="font-Montserrat font-light">{CartItem.category ? CartItem.category : "Mixed"}</p>
+                <p className="font-Montserrat font-light">
+                  {CartItem.category ? CartItem.category : "Mixed"}
+                </p>
               </div>
               <div className="flex items-center gap-x-2">
                 <h2 className="font-Montserrat font-semibold">Tag:</h2>
-                <p className="font-Montserrat font-light">{CartItem.tags ? CartItem.tags : "No Tag"}</p>
+                <p className="font-Montserrat font-light">
+                  {CartItem.tags ? CartItem.tags : "No Tag"}
+                </p>
               </div>
               <div className="flex items-center gap-x-2">
                 <h2 className="font-Montserrat font-semibold">Brand:</h2>
@@ -101,7 +114,11 @@ const HandleCart = () => {
           </Flex>
           <div>
             <h2 className="border-b-[1px] mb-10">Description</h2>
-            <p>{CartItem.description ? CartItem.description : "Desicription Missing"}</p>
+            <p>
+              {CartItem.description
+                ? CartItem.description
+                : "Desicription Missing"}
+            </p>
           </div>
         </div>
       </div>

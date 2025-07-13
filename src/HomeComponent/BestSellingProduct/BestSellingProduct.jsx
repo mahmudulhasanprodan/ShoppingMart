@@ -6,6 +6,7 @@ import { FeatureProduct } from '../../Redux/ProductSlice/ProductSlice'
 import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 import Loading from '../../CommonComponent/Loading/Loading'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 const BestSellingProduct = () => {
   const dispatch = useDispatch();
@@ -45,11 +46,13 @@ const HandleCart = (item,index) => {
               Best Selling Products
             </h2>
           </div>
-           <div>
+          <div>
             {Status === "LOADING" ? (
-              <Loading className={"w-[250px] h-[370px]"}/>
-            ): ""}
-           </div>
+              <Loading className={"w-[250px] h-[370px]"} />
+            ) : (
+              ""
+            )}
+          </div>
           <Flex className={"items-center flex-wrap justify-between gap-y-4"}>
             {featureData?.map((item) => (
               <div key={item.id}>
