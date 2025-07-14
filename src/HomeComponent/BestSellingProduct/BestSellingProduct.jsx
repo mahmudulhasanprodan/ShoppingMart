@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Card from '../../CommonComponent/Card/Card'
 import { useSelector, useDispatch } from 'react-redux'
 import Flex from '../../CommonComponent/Flex'
@@ -6,15 +6,17 @@ import { FeatureProduct } from '../../Redux/ProductSlice/ProductSlice'
 import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 import Loading from '../../CommonComponent/Loading/Loading'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const BestSellingProduct = () => {
   const dispatch = useDispatch();
   const[featureData,setfeatureData] =useState([]);
-  const[itemid,setitemid] = useState([])
+  const Navigate = useNavigate();
+
+  
 
   useEffect(() => {
-    dispatch(FeatureProduct("https://dummyjson.com/products"))
+    dispatch(FeatureProduct("https://dummyjson.com/products"));
   },[])
 
   
@@ -31,8 +33,13 @@ useEffect(() => {
 
 
 // HandleCart Function Start Here
-const HandleCart = (item,index) => {
+const HandleCart = (item) => {
   dispatch(AllCartItem(item));
+};
+
+//HandleProduct Function Start Here
+const HandleProduct = (item) => {
+  Navigate(`/productdetails/${item.id}`);
 };
 
 
@@ -58,11 +65,12 @@ const HandleCart = (item,index) => {
               <div key={item.id}>
                 <div>
                   <Card
+                    ProductDetails={() => HandleProduct(item)}
                     CartProduct={() => HandleCart(item)}
                     FeatueImage={item.thumbnail}
                     Title={`${item.title.slice(0, 16)}....`}
                     MainPrice={`$${Math.round(item.price)}`}
-                    Price={`${
+                    Price={`$${
                       Math.round(item.price) -
                       Math.round(item.price) *
                         (Math.round(item.discountPercentage) / 100)

@@ -3,7 +3,7 @@ import img from "../../assets/HomeComponentpic/featurepic.jpg"
 import Flex from '../../CommonComponent/Flex'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ProductData } from '../../Redux/ProductSlice/ProductSlice'
 import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 
@@ -82,16 +82,18 @@ const HandleCart = () => {
                 </div>
                 <div>
                   <button
-                    className="px-6 py-2 bg-CommonColor font-Montserrat text-white text-md font-light"
+                    className="px-6 py-2 bg-CommonColor font-Montserrat text-white text-md font-light hover:bg-green-500"
                     onClick={HandleCart}
                   >
                     Add To Cart
                   </button>
                 </div>
                 <div>
-                  <button className="px-6 py-2 bg-[#F77426] font-Montserrat text-white text-md font-light">
-                    Buy Now
-                  </button>
+                  <Link to={"/checkout"}>
+                    <button className="px-6 py-2 bg-[#F77426] font-Montserrat text-white text-md font-light active:bg-green-500">
+                      Buy Now
+                    </button>
+                  </Link>
                 </div>
               </Flex>
               <div className="flex items-center gap-x-2">

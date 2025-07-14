@@ -38,7 +38,14 @@ console.log(Loader);
                 <p>{item.CartQuantity ? item.CartQuantity : "0"}</p>
               </div>
               <div className="border-[1px] basis-1/3 pl-3 py-1">
-                <h2>{item.price ? `$${item.price}` : "$0"}</h2>
+                <h2>
+                  {item.price
+                    ? `$${Math.round(
+                        item.price -
+                          (item.price * item.discountPercentage) / 100
+                      )}`
+                    : "$0"}
+                </h2>
               </div>
             </div>
           ))}

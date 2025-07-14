@@ -7,7 +7,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../../Firebase/FirebaseSDK'
 import { FireBaseDataToast } from '../../../Utils/Utils'
 import { useNavigate } from 'react-router-dom'
-
+import { EmailValidation } from '../../../Utils/Utils'
 
 const CheckOutDetails = () => {
 
@@ -70,7 +70,7 @@ const Handlesubmit = () => {
       PostalCodeError: "",
       FullNameError: "FullName Missing",
     }); 
-   }else if(!EmailId){
+   }else if(!EmailId || !EmailValidation(EmailId)){
      setsignUpDataError({
        ...signUpDataError,
        FullNameError: "",
@@ -80,7 +80,7 @@ const Handlesubmit = () => {
        CityNameError: "",
        DistrictNameError: "",
        PostalCodeError: "",
-       EmailIdError: "Email Missing",
+       EmailIdError: "Email is not valid",
      });
    }else if(!Number){
      setsignUpDataError({
@@ -287,7 +287,7 @@ const Handlesubmit = () => {
                     }`}
                     onChange={HandleInputChange}
                   >
-                    <option value="Select Country">Select City</option>
+                    <option value="Select Country">Select Country</option>
                     {CountryName?.map((item) => (
                       <div key={item.id}>
                         <option value="Bangladesh">{item.CountryName}</option>
@@ -337,7 +337,7 @@ const Handlesubmit = () => {
                     }`}
                     onChange={HandleInputChange}
                   >
-                    <option value="Select Country">Select Country</option>
+                    <option value="Select City">Select City</option>
                     {CityName?.map((item) => (
                       <div key={item.id}>
                         <option value="Bangladesh">{item.CountryName}</option>

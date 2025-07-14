@@ -1,6 +1,15 @@
 import {toast,Bounce } from 'react-toastify';
 
 
+export function EmailValidation(email="mahmudulhasan8627@gmail.com") {
+    const RegexPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    let IsValidate = RegexPattern.test(email.toLocaleLowerCase());
+    return IsValidate;     
+}
+
+
+// Toast Function is here
+
 export function SuccessToast(title,position="top-right") {
     toast.success(`${title} Added To Cart`, {
 position: position,

@@ -3,10 +3,11 @@ import Card from "../../../CommonComponent/Card/Card"
 import Flex from '../../../CommonComponent/Flex';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FeatureProduct } from '../../../Redux/ProductSlice/ProductSlice';
 import Loading from '../../../CommonComponent/Loading/Loading';
 import { FaChevronCircleRight,FaChevronCircleLeft} from "react-icons/fa";
+import { AllCartItem } from '../../../Redux/CartSlice/CartSlice';
 
 
 
@@ -19,6 +20,7 @@ const[allData,setallData] = useState([]);
 const[page,setpage]= useState(1);
 const dataLength = allData?.length ?? 0;
 const Value = pageValue;
+const Navigate = useNavigate();
 
 
 
@@ -45,7 +47,15 @@ const HandlePagination = (pageNumber) => {
   } 
 };
 
+// HandleCart Function Start Here
+const HandleCart = (item) => {  
+   dispatch(AllCartItem(item));
+};
 
+// HandleshopDetails Function is Start Here
+const HandleshopDetails = (item) => {
+  Navigate(`/productdetails/${item.id}`)
+};
 
 
   return (
@@ -53,7 +63,7 @@ const HandlePagination = (pageNumber) => {
       <div>
         <div className="absolute top-24">
           <p className="font-Montserrat text-sm font-light">
-            Showing {page*Value-Value + 1}-{Value} of {dataLength} results
+            Showing {page * Value - Value + 1}-{Value} of {dataLength} results
           </p>
         </div>
         <div>
@@ -63,20 +73,20 @@ const HandlePagination = (pageNumber) => {
             }
           >
             {allData?.slice(page * Value - Value, page * Value).map((item) => (
-              <Link to={`/productdetails/${item.id}`}>
-                <div key={item.id}>
-                  <Card
-                    FeatueImage={item.thumbnail}
-                    Title={`${item.title.slice(0, 16)}....`}
-                    MainPrice={`$${Math.round(item.price)}`}
-                    Price={`${
-                      Math.round(item.price) -
-                      Math.round(item.price) *
-                        (Math.round(item.discountPercentage) / 100)
-                    }`}
-                  />
-                </div>
-              </Link>
+              <div key={item.id}>
+                <Card
+                  ProductDetails={() => HandleshopDetails(item)}
+                  CartProduct={() => HandleCart(item)}
+                  FeatueImage={item.thumbnail}
+                  Title={`${item.title.slice(0, 16)}....`}
+                  MainPrice={`$${Math.round(item.price)}`}
+                  Price={`${
+                    Math.round(item.price) -
+                    Math.round(item.price) *
+                      (Math.round(item.discountPercentage) / 100)
+                  }`}
+                />
+              </div>
             ))}
           </Flex>
           {/* Pagination is here */}

@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { GetTotal } from '../../../Redux/CartSlice/CartSlice';
+import { Link } from 'react-router-dom';
+import { FaArrowRight } from "react-icons/fa";
 
 const CartTotal = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,16 @@ useEffect(() => {
             <p className="border-[1px] w-48 pl-5 border-gray-400 py-2 font-Montserrat font-bold text-CommonColor">
               {TotalAmount ? `$${TotalAmount}` : "$30.00"}
             </p>
+          </div>
+          <div className="mt-6">
+            <Link to={"/checkout"}>
+              <button className="px-8 py-2 bg-CommonColor font-Montserrat font-bold text-white text-xl rounded-sm active:bg-green-500 flex items-center gap-x-2">
+                Proceed To Checkout
+                <span>
+                  <FaArrowRight />
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
