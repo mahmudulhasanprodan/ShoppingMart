@@ -7,6 +7,7 @@ import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 import Loading from '../../CommonComponent/Loading/Loading'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import { WishCartItem} from '../../Redux/WishSlice/WishSlice'
 
 const BestSellingProduct = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ useEffect(() => {
 
 
 
+
 // HandleCart Function Start Here
 const HandleCart = (item) => {
   dispatch(AllCartItem(item));
@@ -40,6 +42,11 @@ const HandleCart = (item) => {
 //HandleProduct Function Start Here
 const HandleProduct = (item) => {
   Navigate(`/productdetails/${item.id}`);
+};
+
+//HandleWish Function Start Here
+const HandleWish = (item) => {
+  dispatch(WishCartItem(item))
 };
 
 
@@ -67,6 +74,7 @@ const HandleProduct = (item) => {
                   <Card
                     ProductDetails={() => HandleProduct(item)}
                     CartProduct={() => HandleCart(item)}
+                    WishProduct={() => HandleWish(item)}
                     FeatueImage={item.thumbnail}
                     Title={`${item.title.slice(0, 16)}....`}
                     MainPrice={`$${Math.round(item.price)}`}

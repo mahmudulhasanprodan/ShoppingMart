@@ -17,16 +17,16 @@ const Menu = () => {
         <div className="container">
           <div className="hidden md:block">
             <Flex className={"items-center gap-x-10 py-3"}>
-              <Link to={"/"}>
+              <NavLink to={"/"} className={"focus:text-CommonColor"}>
                 <div className="flex items-center gap-x-1 cursor-pointer">
                   <span className="text-sm">
-                    <IoMdHome/>
+                    <IoMdHome />
                   </span>
                   <h2 className="font-Montserrat text-sm">Home</h2>
                 </div>
-              </Link>
+              </NavLink>
 
-              <NavLink to={"/shop"}>
+              <NavLink to={"/shop"} className={"focus:text-CommonColor"}>
                 <div
                   div
                   className="flex items-center gap-x-1 cursor-pointer active:text-CommonColor"
@@ -37,18 +37,22 @@ const Menu = () => {
                   <h2 className="font-Montserrat text-sm">Shop</h2>
                 </div>
               </NavLink>
-              <div div className="flex items-center gap-x-1 cursor-pointer">
-                <span className="text-xs">
-                  <BsFillFilePersonFill />
-                </span>
-                <h2 className="font-Montserrat text-sm">About</h2>
-              </div>
-              <div div className="flex items-center gap-x-1 cursor-pointer">
-                <span className="text-sm">
-                  <MdOutlineCallSplit />
-                </span>
-                <h2 className="font-Montserrat text-sm">Contact Us</h2>
-              </div>
+              <NavLink to={"#"} className={"focus:text-CommonColor"}>
+                <div div className="flex items-center gap-x-1 cursor-pointer">
+                  <span className="text-xs">
+                    <BsFillFilePersonFill />
+                  </span>
+                  <h2 className="font-Montserrat text-sm">About</h2>
+                </div>
+              </NavLink>
+              <NavLink to={"#"} className={"focus:text-CommonColor"}>
+                <div div className="flex items-center gap-x-1 cursor-pointer">
+                  <span className="text-sm">
+                    <MdOutlineCallSplit />
+                  </span>
+                  <h2 className="font-Montserrat text-sm">Contact Us</h2>
+                </div>
+              </NavLink>
             </Flex>
           </div>
         </div>

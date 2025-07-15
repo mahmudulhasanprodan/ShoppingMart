@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { GetTotal } from '../../Redux/CartSlice/CartSlice';
 import { RemoveItem } from '../../Redux/CartSlice/CartSlice';
 import { Link } from 'react-router-dom';
+import { WishGetTotal } from '../../Redux/WishSlice/WishSlice';
 
 const Header = () => {
  const[menuItem,setmenuItem] = useState(false);
@@ -48,10 +49,17 @@ const HandleMenuItem = () => {
 
 
 const{CartProduct,TotalItem,TotalAmount}=useSelector((state) => state.Cart);
+const{WishTotalitem,WishItem} = useSelector((state) => state.Wish);
 
 useEffect(() => {
   dispatch(GetTotal())
 },[dispatch,CartProduct]);
+
+
+useEffect(() => {
+    dispatch(WishGetTotal());
+},[dispatch,WishItem])
+
 
 // HandleCartMenu Function Start Here
 const HandleCartMenu = () => {
@@ -99,10 +107,14 @@ const HandleCartRemove = (item) => {
                 <div className="hidden md:block">
                   <div className="flex items-center gap-x-4">
                     <div className="text-xl cursor-pointer font-bold relative">
-                      <FaRegHeart />
+                      <Link to={"/wishlist"}>
+                        <span>
+                          <FaRegHeart />
+                        </span>
+                      </Link>
                       <div className="w-6 h-6 bg-gray-300 rounded-full absolute -top-4 -right-3">
                         <h3 className="flex items-center justify-center text-sm h-full text-CommonColor">
-                          0
+                          {WishTotalitem}
                         </h3>
                       </div>
                     </div>
@@ -160,7 +172,15 @@ const HandleCartRemove = (item) => {
                                     </h2>
                                     <h3>
                                       {item.CartQuantity} X $
-                                      {item.CartQuantity * `${Math.round(item.price- Math.round(item.price*item.discountPercentage)/100)}`}
+                                      {item.CartQuantity *
+                                        `${Math.round(
+                                          item.price -
+                                            Math.round(
+                                              item.price *
+                                                item.discountPercentage
+                                            ) /
+                                              100
+                                        )}`}
                                     </h3>
                                   </div>
                                 </Flex>

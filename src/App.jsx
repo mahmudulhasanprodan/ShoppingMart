@@ -10,7 +10,8 @@ import CheckOut from './Pages/CheckOut/CheckOut';
 import OrderComplete from './Pages/OrderComplete/OrderComplete';
 import Login from './Pages/Login/Login';
 import Myaccount from './Pages/MyAccount/Myaccount';
-import Loading from './CommonComponent/Loading/Loading';
+import WishList from './Pages/WishList/WishList';
+
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
     <Route path="/ordercomplete" element={<OrderComplete />}></Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/myaccount" element={<Myaccount />}></Route>
-    <Route path="/Loading" element={<Loading />}></Route>
+    <Route path="/wishlist" element={<WishList />}></Route>
    </Route>
    )
 )

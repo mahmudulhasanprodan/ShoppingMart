@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Card from "../../../CommonComponent/Card/Card"
 import Flex from '../../../CommonComponent/Flex';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { FeatureProduct } from '../../../Redux/ProductSlice/ProductSlice';
 import Loading from '../../../CommonComponent/Loading/Loading';
 import { FaChevronCircleRight,FaChevronCircleLeft} from "react-icons/fa";
-import { AllCartItem } from '../../../Redux/CartSlice/CartSlice';
-
+// import { AllCartItem } from '../../../Redux/CartSlice/CartSlice';
+import { WishCartItem } from '../../../Redux/WishSlice/WishSlice';
 
 
 const ShopBottom = ({pageValue}) => {
@@ -57,6 +56,10 @@ const HandleshopDetails = (item) => {
   Navigate(`/productdetails/${item.id}`)
 };
 
+// HandleWish Fuction Start Here
+const HandleWish = (item) => {
+  dispatch(WishCartItem(item));
+};
 
   return (
     <>
@@ -77,6 +80,7 @@ const HandleshopDetails = (item) => {
                 <Card
                   ProductDetails={() => HandleshopDetails(item)}
                   CartProduct={() => HandleCart(item)}
+                  WishProduct={() => HandleWish(item)}
                   FeatueImage={item.thumbnail}
                   Title={`${item.title.slice(0, 16)}....`}
                   MainPrice={`$${Math.round(item.price)}`}

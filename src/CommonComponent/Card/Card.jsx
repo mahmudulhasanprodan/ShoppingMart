@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import Flex from "../../CommonComponent/Flex"
 
 
-const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct,ProductDetails}) => {
+const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct,ProductDetails,WishProduct}) => {
 
 
 
@@ -12,7 +12,10 @@ const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct,ProductDetails}) =>
     <>
       <div>
         <div className="w-[250px] h-[370px] bg-white shadow-lg">
-          <div className="w-full h-[200px] cursor-pointer" onClick={ProductDetails}>
+          <div
+            className="w-full h-[200px] cursor-pointer"
+            onClick={ProductDetails}
+          >
             <picture>
               <img
                 src={FeatueImage}
@@ -45,7 +48,10 @@ const Card = ({FeatueImage,Title,Price,MainPrice,CartProduct,ProductDetails}) =>
               </button>
             </div>
             <div>
-              <button className="px-2 py-3 border-[1px] border-gray-400 flex items-center gap-x-2 font-Montserrat hover:bg-CommonColor hover:text-white">
+              <button
+                className="px-2 py-3 border-[1px] border-gray-400 flex items-center gap-x-2 font-Montserrat hover:bg-CommonColor hover:text-white"
+                onClick={WishProduct}
+              >
                 <span>
                   <FaRegHeart />
                 </span>
