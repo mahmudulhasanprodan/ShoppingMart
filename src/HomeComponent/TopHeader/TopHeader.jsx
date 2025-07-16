@@ -6,6 +6,7 @@ import { IoMdMail } from "react-icons/io";
 import { RiSkypeFill } from "react-icons/ri";
 import { RiAccountBox2Fill } from "react-icons/ri";
 import { IoLogInSharp } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 const TopHeader = () => {
   return (
@@ -52,18 +53,22 @@ const TopHeader = () => {
               </div>
             </Flex>
             <Flex className={"items-center gap-x-3"}>
-              <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
-                <span className="text-iconColor text-md">
-                  <RiAccountBox2Fill />
-                </span>
-                <p>My Account</p>
-              </div>
-              <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
-                <span className="text-iconColor text-md">
-                  <IoLogInSharp />
-                </span>
-                <p>Login</p>
-              </div>
+              <Link to={"/myaccount"}>
+                <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
+                  <span className="text-iconColor text-md">
+                    <RiAccountBox2Fill />
+                  </span>
+                  <p>My Account</p>
+                </div>
+              </Link>
+              <Link to={"/login"}>
+                <div className="flex items-center cursor-pointer gap-x-1 font-Montserrat text-sm">
+                  <span className="text-iconColor text-md">
+                    <IoLogInSharp />
+                  </span>
+                  <p>Login</p>
+                </div>
+              </Link>
             </Flex>
           </div>
         </div>

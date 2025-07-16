@@ -27,7 +27,7 @@ const HandleRemove = (item) => {
 //HandleWishCart Function Start Here
 const HandleWishCart = (item) => {
     dispatch(AllCartItem(item))
- 
+    dispatch(WishRemoveItem(item));
 };
 
 

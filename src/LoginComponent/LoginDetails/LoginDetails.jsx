@@ -4,6 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const LoginDetails = () => {
@@ -56,9 +57,11 @@ const LoginDetails = () => {
                 </div>
                 <div className="flex items-center gap-x-1">
                   <p className="font-Montserrat">Do you have any account?</p>
-                  <h3 className="font-Montserrat underline font-medium cursor-pointer">
-                    SignUp
-                  </h3>
+                  <Link to={"/signup"}>
+                    <h3 className="font-Montserrat underline font-medium cursor-pointer">
+                      SignUp
+                    </h3>
+                  </Link>
                 </div>
                 <div>
                   <p className="text-center font-Montserrat">OR</p>

@@ -1,13 +1,13 @@
 import React from 'react'
 
-const Loading = ({className}) => {
+const Loading = ({className,LoadItem}) => {
  
     
   return (
     <>
-      <div className="flex items-center flex-wrap gap-y-4 justify-between">
+      <div className={className}>
         {[...new Array(10).map((_, index) => index)].map((item) => (
-          <div className={`bg-gray-300 ${className}`} key={item + ""}>
+          <div className="bg-gray-300 w-[250px] h-[370px]" key={item + ""}>
             <div className="flex gap-x-2 items-center justify-center h-full animate-pulse">
               <div className="w-10 h-10 rounded-full bg-slate-700"></div>
               <div className="flex flex-col gap-y-3">

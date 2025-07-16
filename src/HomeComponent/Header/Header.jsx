@@ -15,6 +15,8 @@ import { GetTotal } from '../../Redux/CartSlice/CartSlice';
 import { RemoveItem } from '../../Redux/CartSlice/CartSlice';
 import { Link } from 'react-router-dom';
 import { WishGetTotal } from '../../Redux/WishSlice/WishSlice';
+import { FaShopware } from "react-icons/fa";
+
 
 const Header = () => {
  const[menuItem,setmenuItem] = useState(false);
@@ -78,14 +80,16 @@ const HandleCartRemove = (item) => {
       <div className="bg-TopHColor" ref={CartMenuRef}>
         <div className="container">
           <div className="flex items-center justify-between py-4 px-4">
-            <div className="flex items-center gap-x-1 cursor-pointer">
-              <span className="text-5xl font-bold text-yellow-600">
-                <FaShopify />
-              </span>
-              <h3 className="font-Montserrat font-bold text-CommonColor text-2xl">
-                ShoppingMart
-              </h3>
-            </div>
+            <Link to={"/"}>
+              <div className="flex items-center gap-x-0 cursor-pointer">
+                <span className="text-[40px] font-bold text-yellow-500">
+                  <FaShopware />
+                </span>
+                <h3 className="font-Roboto font-bold text-CommonColor text-3xl">
+                  HatBazar
+                </h3>
+              </div>
+            </Link>
             <Flex className={"items-center gap-x-10"}>
               <div className="flex items-center">
                 <div className="hidden md:block">

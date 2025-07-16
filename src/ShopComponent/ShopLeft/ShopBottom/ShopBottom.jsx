@@ -6,8 +6,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FeatureProduct } from '../../../Redux/ProductSlice/ProductSlice';
 import Loading from '../../../CommonComponent/Loading/Loading';
 import { FaChevronCircleRight,FaChevronCircleLeft} from "react-icons/fa";
-// import { AllCartItem } from '../../../Redux/CartSlice/CartSlice';
+import { AllCartItem } from '../../../Redux/CartSlice/CartSlice';
 import { WishCartItem } from '../../../Redux/WishSlice/WishSlice';
+
 
 
 const ShopBottom = ({pageValue}) => {
@@ -70,29 +71,38 @@ const HandleWish = (item) => {
           </p>
         </div>
         <div>
-          <Flex
-            className={
-              "items-center justify-center md:justify-start flex-wrap gap-x-6 gap-y-6"
-            }
-          >
-            {allData?.slice(page * Value - Value, page * Value).map((item) => (
-              <div key={item.id}>
-                <Card
-                  ProductDetails={() => HandleshopDetails(item)}
-                  CartProduct={() => HandleCart(item)}
-                  WishProduct={() => HandleWish(item)}
-                  FeatueImage={item.thumbnail}
-                  Title={`${item.title.slice(0, 16)}....`}
-                  MainPrice={`$${Math.round(item.price)}`}
-                  Price={`${
-                    Math.round(item.price) -
-                    Math.round(item.price) *
-                      (Math.round(item.discountPercentage) / 100)
-                  }`}
-                />
-              </div>
-            ))}
-          </Flex>
+          {Status === "LOADING" ? (
+            <p>
+              <Loading className={"flex items-center flex-wrap gap-y-4 gap-x-4"} LoadItem={pageValue}/>
+            </p>
+          ) : (
+            <Flex
+              className={
+                "items-center justify-center md:justify-start flex-wrap gap-x-6 gap-y-6"
+              }
+            >
+              {allData
+                ?.slice(page * Value - Value, page * Value)
+                .map((item) => (
+                  <div key={item.id}>
+                    <Card
+                      ProductDetails={() => HandleshopDetails(item)}
+                      CartProduct={() => HandleCart(item)}
+                      WishProduct={() => HandleWish(item)}
+                      FeatueImage={item.thumbnail}
+                      Title={`${item.title.slice(0, 16)}....`}
+                      MainPrice={`$${Math.round(item.price)}`}
+                      Price={`${
+                        Math.round(item.price) -
+                        Math.round(item.price) *
+                          (Math.round(item.discountPercentage) / 100)
+                      }`}
+                    />
+                  </div>
+                ))}
+            </Flex>
+          )}
+
           {/* Pagination is here */}
           <div>
             <div className="flex items-center justify-end gap-x-3 py-10 w-[90%]">

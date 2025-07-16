@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-
+import { SuccessToast } from '../../../Utils/Utils';
 
 
 
@@ -24,6 +24,7 @@ export const WishSlice = createSlice({
       } else {
         state.WishItem.push({ ...action.payload, CartQuantity: 1 });
         localStorage.setItem("wishProduct", JSON.stringify(state.WishItem));
+        SuccessToast(action.payload.title);
       }
     },
     

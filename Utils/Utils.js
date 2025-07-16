@@ -13,7 +13,7 @@ export function EmailValidation(email="mahmudulhasan8627@gmail.com") {
 export function SuccessToast(title,position="top-right") {
     toast.success(`${title} Added To Cart`, {
 position: position,
-autoClose: 5000,
+autoClose: 1000,
 hideProgressBar: false,
 closeOnClick: false,
 pauseOnHover: true,

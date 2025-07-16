@@ -11,6 +11,7 @@ import OrderComplete from './Pages/OrderComplete/OrderComplete';
 import Login from './Pages/Login/Login';
 import Myaccount from './Pages/MyAccount/Myaccount';
 import WishList from './Pages/WishList/WishList';
+import SignUp from './Pages/SignUp/SignUp';
 
 import {
   createBrowserRouter,
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
     <Route path="/login" element={<Login />}></Route>
     <Route path="/myaccount" element={<Myaccount />}></Route>
     <Route path="/wishlist" element={<WishList />}></Route>
+    <Route path="/signup" element={<SignUp />}></Route>
    </Route>
    )
 )

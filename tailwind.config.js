@@ -8,6 +8,7 @@ export default {
     fontFamily: {
       Montserrat: "var(--Montserrat)",
       Roboto: "var(--Roboto)",
+      Anton: "var(--Anton)",
     },
     extend: {
       colors: {

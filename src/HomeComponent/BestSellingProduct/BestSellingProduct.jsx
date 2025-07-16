@@ -60,34 +60,33 @@ const HandleWish = (item) => {
               Best Selling Products
             </h2>
           </div>
-          <div>
-            {Status === "LOADING" ? (
-              <Loading className={"w-[250px] h-[370px]"} />
-            ) : (
-              ""
-            )}
-          </div>
-          <Flex className={"items-center flex-wrap justify-between gap-y-4"}>
-            {featureData?.map((item) => (
-              <div key={item.id}>
-                <div>
-                  <Card
-                    ProductDetails={() => HandleProduct(item)}
-                    CartProduct={() => HandleCart(item)}
-                    WishProduct={() => HandleWish(item)}
-                    FeatueImage={item.thumbnail}
-                    Title={`${item.title.slice(0, 16)}....`}
-                    MainPrice={`$${Math.round(item.price)}`}
-                    Price={`$${
-                      Math.round(item.price) -
-                      Math.round(item.price) *
-                        (Math.round(item.discountPercentage) / 100)
-                    }`}
-                  />
+          {Status === "LOADING" ? (
+            <p>
+              <Loading className={"flex items-center flex-wrap gap-y-4 justify-between"}/>
+            </p>
+          ) : (
+            <Flex className={"items-center flex-wrap justify-between gap-y-4"}>
+              {featureData?.map((item) => (
+                <div key={item.id}>
+                  <div>
+                    <Card
+                      ProductDetails={() => HandleProduct(item)}
+                      CartProduct={() => HandleCart(item)}
+                      WishProduct={() => HandleWish(item)}
+                      FeatueImage={item.thumbnail}
+                      Title={`${item.title.slice(0, 16)}....`}
+                      MainPrice={`$${Math.round(item.price)}`}
+                      Price={`$${
+                        Math.round(item.price) -
+                        Math.round(item.price) *
+                          (Math.round(item.discountPercentage) / 100)
+                      }`}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Flex>
+              ))}
+            </Flex>
+          )}
         </div>
       </div>
     </>
