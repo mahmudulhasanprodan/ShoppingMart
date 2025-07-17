@@ -49,7 +49,7 @@ export const CartSLice = createSlice({
        if(state.CartProduct[DecrementInDex].CartQuantity > 1){
          state.CartProduct[DecrementInDex].CartQuantity -= 1;
          localStorage.setItem("Cartitem", JSON.stringify(state.CartProduct)); 
-      }    
+      }  
      },
      GetTotal: (state,action) => {  
      const TotalcartData = state.CartProduct.reduce((previousitem,currentitem) => {
