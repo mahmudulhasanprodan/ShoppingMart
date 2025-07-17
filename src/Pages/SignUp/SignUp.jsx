@@ -1,18 +1,144 @@
-import React from 'react'
+import React, { useState } from 'react'
 import BillingForm from '../../CommonComponent/BillingForm/BillingForm';
 import Flex from '../../CommonComponent/Flex';
-import { FaShopify } from "react-icons/fa6";
+import { FaShopware } from "react-icons/fa";
+import { EmailValidation } from '../../../Utils/Utils';
+import { getAuth,createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
+import { SuccessToast } from '../../../Utils/Utils';
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../../Firebase/FirebaseSDK';
+
+
 
 const SignUp = () => {
+
+ const auth = getAuth();
+const[loading,setloading] =useState(false);
+  const[SignUpData,setSignUpData] = useState({
+    FullName : "",
+    EmailAddress : "",
+    Password : "",
+    RepeatPassword: "",
+  });
+
+    const[SignUpDataError,setSignUpDataError] = useState({
+    FullNameError : "",
+    EmailAddressError : "",
+    PasswordError : "",
+    RepeatPasswordError: "",
+    PasswordNotMatch: "",
+  });
+
+//HandleSignUp Function start here
+const HandleSignUp = (e) => {
+  setSignUpData({
+    ...SignUpData,
+    [e.target.id] : e.target.value,
+  })
+  
+};
+
+// HandleSubmit Function Start Here
+const HandleSubmit = (e) => {
+  e.preventDefault();
+  const { FullName, EmailAddress, Password, RepeatPassword } = SignUpData;
+  if (!FullName) {
+    setSignUpDataError({
+      ...SignUpDataError,
+      EmailAddressError: "",
+      PasswordError: "",
+      RepeatPasswordError: "",
+      PasswordNotMatch: "",
+      FullNameError: "Full Name Missing",
+    });
+  } else if (!EmailAddress || !EmailValidation(EmailAddress)) {
+    setSignUpDataError({
+      ...SignUpDataError,
+      FullNameError: "",
+      PasswordError: "",
+      RepeatPasswordError: "",
+      PasswordNotMatch: "",
+      EmailAddressError: "Email not Valid",
+    });
+  } else if (!Password) {
+    setSignUpDataError({
+      ...SignUpDataError,
+      FullNameError: "",
+      EmailAddressError: "",
+      RepeatPasswordError: "",
+      PasswordNotMatch: "",
+      PasswordError: "Password Missing",
+    });
+  } else if (!RepeatPassword) {
+    setSignUpDataError({
+      ...SignUpDataError,
+      FullNameError: "",
+      EmailAddressError: "",
+      PasswordError: "",
+      PasswordNotMatch: "",
+      RepeatPasswordError: "Repeat Password Missing",
+    });
+  } else if (Password !== RepeatPassword) {
+    setSignUpDataError({
+      ...SignUpDataError,
+      FullNameError: "",
+      EmailAddressError: "",
+      PasswordError: "",
+      RepeatPasswordError: "",
+      PasswordNotMatch: "",
+      PasswordNotMatch: "Username or Password not Match",
+    });
+  } else {
+    setloading(true);
+    // Data SigUp
+    createUserWithEmailAndPassword(
+      auth,
+      SignUpData.EmailAddress,
+      SignUpData.Password
+    )
+      .then((userInfo) => {
+        SuccessToast(
+          `${SignUpData.FullName} Data Successfully Done`,
+          "top-center"
+        );
+      })
+      .then(() => {
+        addDoc(collection(db, "SignUp_Data"), SignUpData)
+          .then((userCredential) => {
+            sendEmailVerification(auth.currentUser).then(() => {});
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setSignUpData({
+          FullName: "",
+          EmailAddress: "",
+          Password: "",
+          RepeatPassword: "",
+        });
+        setloading(false);
+      });
+  }
+};
+
   return (
     <>
       <div className="bg-TopHColor">
         <div className="container">
           <Flex className={"py-20"}>
-            <div className="w-1/2 bg-white py-10 px-4 shadow-lg">
+            <div className="w-full md:w-1/2 bg-white py-10 px-4 shadow-lg">
               <div className="pb-10 py-2">
-                <h2 className="font-Montserrat font-bold text-2xl pb-1">HELLO!</h2>
-                <p className="font-Montserrat text-sm font-light text-gray-400">Sign up to continue</p>
+                <h2 className="font-Montserrat font-bold text-2xl pb-1">
+                  HELLO!
+                </h2>
+                <p className="font-Montserrat text-sm font-light text-gray-400">
+                  Sign up to continue
+                </p>
               </div>
               <form action="#">
                 <div className="flex flex-col gap-y-3">
@@ -23,8 +149,19 @@ const SignUp = () => {
                       InputType={"text"}
                       InputPlaceholder={"John Doe"}
                       InputId={"FullName"}
-                      InputClass="border-b-[1px] w-96 py-1"
+                      ValueForm={SignUpData.FullName}
+                      InputClass={`${
+                        SignUpDataError.FullNameError
+                          ? "border-b-[1px] w-96 py-1 border-red-500"
+                          : "border-b-[1px] w-96 py-1"
+                      }`}
+                      OnChangeItem={HandleSignUp}
                     />
+                    {SignUpDataError.FullNameError && (
+                      <p className="text-CommonColor">
+                        {SignUpDataError.FullNameError}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <BillingForm
@@ -33,8 +170,19 @@ const SignUp = () => {
                       InputType={"email"}
                       InputPlaceholder={"johndoe@gmail.com"}
                       InputId={"EmailAddress"}
-                      InputClass="border-b-[1px] w-96 py-1"
+                      ValueForm={SignUpData.EmailAddress}
+                      InputClass={`${
+                        SignUpDataError.EmailAddressError
+                          ? "border-b-[1px] w-96 py-1 border-red-500"
+                          : "border-b-[1px] w-96 py-1"
+                      }`}
+                      OnChangeItem={HandleSignUp}
                     />
+                    {SignUpDataError.EmailAddressError && (
+                      <p className="text-CommonColor">
+                        {SignUpDataError.EmailAddressError}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <BillingForm
@@ -43,8 +191,19 @@ const SignUp = () => {
                       InputType={"password"}
                       InputPlaceholder={"Password"}
                       InputId={"Password"}
-                      InputClass="border-b-[1px] w-96 py-1"
+                      ValueForm={SignUpData.Password}
+                      InputClass={`${
+                        SignUpDataError.PasswordError
+                          ? "border-b-[1px] w-96 py-1 border-red-500"
+                          : "border-b-[1px] w-96 py-1"
+                      }`}
+                      OnChangeItem={HandleSignUp}
                     />
+                    {SignUpDataError.PasswordError && (
+                      <p className="text-CommonColor">
+                        {SignUpDataError.PasswordError}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <BillingForm
@@ -53,24 +212,58 @@ const SignUp = () => {
                       InputType={"Password"}
                       InputPlaceholder={"Confirm Password"}
                       InputId={"RepeatPassword"}
-                      InputClass="border-b-[1px] w-96 py-1"
+                      ValueForm={SignUpData.RepeatPassword}
+                      InputClass={`${
+                        SignUpDataError.RepeatPasswordError
+                          ? "border-b-[1px] w-96 py-1 border-red-500"
+                          : "border-b-[1px] w-96 py-1"
+                      }`}
+                      OnChangeItem={HandleSignUp}
                     />
+                    {SignUpDataError.RepeatPasswordError && (
+                      <p className="text-CommonColor">
+                        {SignUpDataError.RepeatPasswordError}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    {SignUpDataError.PasswordNotMatch && (
+                      <p className="text-CommonColor">
+                        {SignUpDataError.PasswordNotMatch}
+                      </p>
+                    )}
                   </div>
                   <div className="mt-4">
-                    <button className="w-72 py-2 bg-[#87A798] font-Montserrat text-white font-bold rounded-md">
-                      Sign Up
-                    </button>
+                    {loading ? (
+                      <button
+                        type="button"
+                        className="bg-indigo-500 w-72 rounded-md py-2 flex items-center justify-center font-Montserrat text-white font-bold"
+                      >
+                        <svg
+                          className="animate-spin h-5 w-5 mr-3 border-4 border-white border-b-4 border-b-red-500 rounded-full"
+                          viewBox="0 0 24 24"
+                        ></svg>
+                        Processing...
+                      </button>
+                    ) : (
+                      <button
+                        className="w-72 py-2 bg-[#87A798] font-Montserrat text-white font-bold rounded-md"
+                        onClick={HandleSubmit}
+                      >
+                        Sign Up
+                      </button>
+                    )}
                   </div>
                 </div>
               </form>
             </div>
-            <div className="w-1/2 bg-[#87A798] shadow-lg">
+            <div className="w-1/2 bg-[#87A798] shadow-lg hidden md:block">
               <div className="flex flex-col items-center justify-center h-full">
                 <span className="font-bold text-5xl text-white">
-                  <FaShopify />
+                  <FaShopware />
                 </span>
                 <h2 className="font-Montserrat font-bold text-2xl text-white">
-                  ShoppingMart
+                  HatBazar
                 </h2>
               </div>
             </div>

@@ -3,7 +3,7 @@ import BannerImage from "../../assets/HomeComponentpic/Banner.jpg"
 const Banner = () => {
   return (
     <>
-      <div className="bg-TopHColor py-4">
+      <div className="bg-TopHColor py-4 hidden md:block">
         <div className="container">
             <div>
                 <picture>

@@ -168,7 +168,7 @@ const Handlesubmit = () => {
     });
     setloading(true);
 //  Data sending FireStore
-    addDoc(collection(db, "users"),signUpData).then((userCredentsial) => {
+    addDoc(collection(db, "Billing_Data"),signUpData).then((userCredentsial) => {
       // FireBaseDataToast(signUpData.FullName);
       Navigate("/ordercomplete")
     }).catch((error) => {
@@ -198,8 +198,8 @@ const Handlesubmit = () => {
     <>
       <div className="bg-TopHColor">
         <div className="container">
-          <Flex className={"justify-between py-10"}>
-            <div className="w-[700px] bg-white">
+          <Flex className={"flex-col md:flex-row justify-between py-10"}>
+            <div className="w-full md:w-[700px] bg-white">
               <div className="p-4">
                 <h2 className="font-Montserrat text-2xl font-bold">CheckOut</h2>
               </div>
@@ -220,8 +220,8 @@ const Handlesubmit = () => {
                     ValueForm = {signUpData.FullName}
                     InputClass={` ${
                       signUpDataError.FullNameError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
                     }`}
                   />
                   {signUpDataError.FullNameError && (
@@ -240,8 +240,8 @@ const Handlesubmit = () => {
                     InputId={"EmailId"}
                     InputClass={` ${
                       signUpDataError.EmailIdError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
                     }`}
                   />
                   {signUpDataError.EmailIdError && (
@@ -260,8 +260,8 @@ const Handlesubmit = () => {
                     InputId={"Number"}
                     InputClass={` ${
                       signUpDataError.NumberError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
                     }`}
                   />
                   {signUpDataError.NumberError && (
@@ -282,8 +282,8 @@ const Handlesubmit = () => {
                     id="CountryName"
                     className={`${
                       signUpDataError.CountryNameError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
                     }`}
                     onChange={HandleInputChange}
                   >
@@ -310,8 +310,8 @@ const Handlesubmit = () => {
                     InputId={"Address"}
                     InputClass={` ${
                       signUpDataError.AddressError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
                     }`}
                   />
                   {signUpDataError.AddressError && (
@@ -332,8 +332,8 @@ const Handlesubmit = () => {
                     id="CityName"
                     className={`${
                       signUpDataError.CityNameError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
                     }`}
                     onChange={HandleInputChange}
                   >
@@ -362,8 +362,8 @@ const Handlesubmit = () => {
                     id="DistrictName"
                     className={`${
                       signUpDataError.DistrictNameError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
+                        ? "w-full md:w-96border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4 mt-2"
                     }`}
                     onChange={HandleInputChange}
                   >
@@ -391,8 +391,8 @@ const Handlesubmit = () => {
                     InputId={"PostalCode"}
                     InputClass={` ${
                       signUpDataError.AddressError
-                        ? "w-96 border-[1px] border-red-300 py-1 pl-3"
-                        : "w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
+                        ? "w-full md:w-96 border-[1px] border-red-300 py-1 pl-3"
+                        : "w-full md:w-96 pl-3 focus:border-CommonColor border-[1px] py-1 rounded-md mb-4"
                     }`}
                   />
                    {signUpDataError.PostalCodeError && (
@@ -403,7 +403,7 @@ const Handlesubmit = () => {
                 </div>
               </div>
             </div>
-            <div className="w-[500px] h-[500px] bg-white">
+            <div className="w-full md:w-[500px] h-[500px] bg-white">
               <OrderHistory Onsubmit={Handlesubmit} Loader={loading}/>
             </div>
           </Flex>

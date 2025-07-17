@@ -65,7 +65,7 @@ const HandleWish = (item) => {
   return (
     <>
       <div>
-        <div className="absolute top-24">
+        <div className="absolute top-24 hidden md:block">
           <p className="font-Montserrat text-sm font-light">
             Showing {page * Value - Value + 1}-{Value} of {dataLength} results
           </p>

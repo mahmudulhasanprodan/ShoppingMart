@@ -15,7 +15,7 @@ const Menu = () => {
     <>
       <div className="bg-TopHColor border-t-[1px] border-gray-300">
         <div className="container">
-          <div className="hidden md:block">
+          <div className="hidden md:block md:px-4">
             <Flex className={"items-center gap-x-10 py-3"}>
               <NavLink to={"/"} className={"focus:text-CommonColor"}>
                 <div className="flex items-center gap-x-1 cursor-pointer">

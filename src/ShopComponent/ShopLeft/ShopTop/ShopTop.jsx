@@ -33,11 +33,6 @@ const ShopTop = () => {
                   "flex-col md:flex-row gap-y-4 md:gap-y-0 items-center justify-start md:justify-end"
                 }
               >
-                {/* <div>
-                  <p className="font-Montserrat text-sm font-light">
-                    Showing 1–{pageItemValue} of 18 results
-                  </p>
-                </div> */}
                 <div>
                   <select
                     name="ProductShorting"
@@ -64,11 +59,11 @@ const ShopTop = () => {
                   </select>
                 </div>
               </Flex>
-              <div className="mt-16 w-full md:w-[914px]">
-                <ShopBottom pageValue={pageItemValue}/>
+              <div className="mt-16 w-full 2xl:w-[914px]">
+                <ShopBottom pageValue={pageItemValue}/> 
               </div>
             </div>
-            <div className="hidden md:block">
+            <div className="hidden xl:block">
               <ShopRight />
             </div>
           </Flex>

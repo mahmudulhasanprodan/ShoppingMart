@@ -12,9 +12,9 @@ const LoginDetails = () => {
     <>
       <div className="bg-TopHColor py-20">
         <div className="container">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center px-4 md:px-0">
             <div className="w-[400px] h-[400px] bg-gray-200 rounded-lg">
-              <Flex className={"flex-col gap-y-4 items-center mt-10"}>
+              <Flex className={"flex-col gap-y-4 items-center mt-10 px-2 md:px-2"}>
                 <div className="">
                   <h2 className="font-Montserrat font-bold text-3xl">Login</h2>
                 </div>

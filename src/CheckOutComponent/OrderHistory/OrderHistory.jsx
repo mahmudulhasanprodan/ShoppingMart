@@ -8,7 +8,7 @@ const OrderHistory = ({Onsubmit,Loader}) => {
 const{CartProduct,TotalItem,TotalAmount}= useSelector((state) => state.Cart);
 
 
-console.log(Loader);
+
 
 
   return (

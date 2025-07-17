@@ -76,7 +76,7 @@ var settings = {
 
   return (
     <>
-      <div>
+      <div className="hidden lg:block">
         <Slider {...settings}>
           <div>
             <picture>

@@ -19,7 +19,7 @@ const OrderComplete = () => {
               </div>
             </div>
             <div>
-              <p className="font-Montserrat font-bold text-2xl">
+              <p className="font-Montserrat font-bold text-2xl text-center md:text-start">
                 Your Order Has Been Completed
               </p>
             </div>

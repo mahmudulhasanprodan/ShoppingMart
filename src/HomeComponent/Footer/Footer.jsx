@@ -37,62 +37,66 @@ const Footer = () => {
 
             <Flex className={"flex-col"}>
               <div className="mb-6">
-                <h2 className="font-Montserrat font-bold text-xl text-slate-700">
+                <h2 className="font-Montserrat font-bold text-xl text-slate-700 md:hidden lg:block">
                   We Accept
                 </h2>
               </div>
-              <div className="flex items-center gap-y-3 flex-wrap w-72 gap-x-3">
-                <div>
-                  <picture>
-                    <img
-                      src={MarterCard}
-                      alt={MarterCard}
-                      className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
-                    />
-                  </picture>
-                </div>
-                <div>
-                  <picture>
-                    <img
-                      src={Bkash}
-                      alt={Bkash}
-                      className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
-                    />
-                  </picture>
-                </div>
-                <div>
-                  <picture>
-                    <img
-                      src={Rocket}
-                      alt={Rocket}
-                      className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
-                    />
-                  </picture>
-                </div>
-                <div>
-                  <picture>
-                    <img
-                      src={Paypal}
-                      alt={Paypal}
-                      className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
-                    />
-                  </picture>
-                </div>
-                <div>
-                  <picture>
-                    <img
-                      src={Visa}
-                      alt={Visa}
-                      className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
-                    />
-                  </picture>
+              <div className="md:hidden lg:block">
+                <div className="flex items-center gap-y-3 flex-wrap w-72 gap-x-3">
+                  <div>
+                    <picture>
+                      <img
+                        src={MarterCard}
+                        alt={MarterCard}
+                        className="w-20 h-12  rounded-lg shadow-md cursor-pointer"
+                      />
+                    </picture>
+                  </div>
+                  <div>
+                    <picture>
+                      <img
+                        src={Bkash}
+                        alt={Bkash}
+                        className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
+                      />
+                    </picture>
+                  </div>
+                  <div>
+                    <picture>
+                      <img
+                        src={Rocket}
+                        alt={Rocket}
+                        className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
+                      />
+                    </picture>
+                  </div>
+                  <div>
+                    <picture>
+                      <img
+                        src={Paypal}
+                        alt={Paypal}
+                        className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
+                      />
+                    </picture>
+                  </div>
+                  <div>
+                    <picture>
+                      <img
+                        src={Visa}
+                        alt={Visa}
+                        className="w-20 h-12 rounded-lg shadow-md cursor-pointer"
+                      />
+                    </picture>
+                  </div>
                 </div>
               </div>
             </Flex>
             <div className="flex flex-col">
-                <div className="mb-6">
-                    <h2 className="font-Montserrat font-bold text-xl text-slate-700">Shop Location</h2>
-                </div>
+              <div className="mb-6">
+                <h2 className="font-Montserrat font-bold text-xl text-slate-700">
+                  Shop Location
+                </h2>
+              </div>
               <div className="flex flex-col gap-y-3">
                 <div className="flex item-center text-sm gap-x-1 cursor-pointer">
                   <span className="text-iconColor">

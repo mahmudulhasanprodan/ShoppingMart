@@ -10,8 +10,8 @@ const SiteCatagori = () => {
     <>
       <div className="bg-TopHColor">
         <div className="container">
-           <Flex className={"gap-x-4"}>
-             <div className="w-[20%] h-[500px] bg-white">
+           <Flex className={"gap-x-4 px-4 xl:px-0"}>
+             <div className="w-full xl:w-[20%] h-[500px] bg-white hidden md:block">
                <div className="flex gap-x-3 items-center pl-2 pt-2 cursor-pointer">
                  <span className="font-bold text-xl"><FaBars /></span>
                  <h2 className="font-Montserrat font-bold text-2xl">All Products</h2>
@@ -48,7 +48,7 @@ const SiteCatagori = () => {
                  </div>
                </div>
             </div>
-            <div className="w-[60%] realative">
+            <div className="w-[60%] realative hidden md:block">
                <SliderPart />
             </div>
            </Flex>

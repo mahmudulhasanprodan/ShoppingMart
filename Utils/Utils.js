@@ -11,7 +11,7 @@ export function EmailValidation(email="mahmudulhasan8627@gmail.com") {
 // Toast Function is here
 
 export function SuccessToast(title,position="top-right") {
-    toast.success(`${title} Added To Cart`, {
+    toast.success(`${title}`, {
 position: position,
 autoClose: 1000,
 hideProgressBar: false,
