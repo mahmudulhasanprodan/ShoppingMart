@@ -4,7 +4,7 @@ import Flex from '../../CommonComponent/Flex'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ProductData } from '../../Redux/ProductSlice/ProductSlice'
+import { FeatureProduct } from '../../Redux/ProductSlice/ProductSlice'
 import { AllCartItem } from '../../Redux/CartSlice/CartSlice'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -13,8 +13,11 @@ import 'react-medium-image-zoom/dist/styles.css';
 import { FaArrowRight,FaArrowLeft } from "react-icons/fa6";
 import ProductComment from '../ProductComment/ProductComment'
 import BillingForm from '../../CommonComponent/BillingForm/BillingForm'
-import { Increment,Decrement } from '../../Redux/CartSlice/CartSlice'
-
+// import { Increment,Decrement } from '../../Redux/CartSlice/CartSlice'
+import { ProductIncrement } from '../../Redux/ProductSlice/ProductSlice'
+import { collection, addDoc  } from "firebase/firestore"; 
+import {db} from "../../../Firebase/FirebaseSDK"
+import { SuccessToast } from '../../../Utils/Utils'
 
 
 
@@ -24,22 +27,25 @@ const dispatch = useDispatch();
 const {ProductId} = useParams();
 const Navigate = useNavigate();
 const[ZoomImage,setZoomImage] = useState(false)
+const[realtime,setrealtime] = useState(false)
+const[commentinput,setcommentinput] = useState({
+  Name: "",
+  InputMessege : "",
+})
+
+const[commentinputError,setcommentinputError] = useState({
+  NameError: "",
+  InputMessegeError : "",
+})
 
 
 //Data Feacthing Is Here
 useEffect(() => {
-  const DataFetcher = async () => {
-    const FetchData = await axios.get(`https://dummyjson.com/products/${ProductId}`); 
-    dispatch(ProductData(FetchData.data));
-      
-  }
-  DataFetcher();
+  dispatch(FeatureProduct(`https://dummyjson.com/products/${ProductId}`));
 },[]);
 
 
 const{CartItem}=useSelector((state) => state.Product);
-
-console.log(CartItem);
 
 
 
@@ -120,15 +126,58 @@ function SamplePrevArrow(props) {
   };
 
 /// HandleDecriment Function Start Here
-const HandleDecriment = (item) => {
- 
-  
+const HandleDecriment = (e) => {
+
+
 };
 
 //HandleIncriment Function is Here
 const HandleIncriment = (item) => {
- 
+   dispatch(ProductIncrement(item))
 };
+
+// HandleChange function start here
+ const HandleChange = (e) => {
+   setcommentinput({
+    ...commentinput,
+    [e.target.id] : e.target.value,
+   })
+ };
+
+ // HandlePost Function Start here
+ const HandlePost = () => {
+  const { Name, InputMessege } = commentinput;
+  if(!Name){
+    setcommentinputError({
+      ...commentinputError,
+      InputMessegeError: "",
+      NameError: "Name Missing"
+    });
+  }else if(!InputMessege){
+    setcommentinputError({
+      ...commentinputError,
+      NameError: "",
+      InputMessegeError: "Messege Missing"
+    });
+  }else{
+
+    addDoc(collection(db, "Comment"),commentinput).then(() => {
+      setrealtime(!realtime)
+       SuccessToast(`${commentinput.Name} Commented`)
+    }).catch((error) => {
+      console.log(error);
+      
+    }).finally(() => {
+        setcommentinput({
+          Name: "",
+          InputMessege: "",
+        });
+    })
+
+    
+  }
+   
+ };
 
   return (
     <>
@@ -171,21 +220,23 @@ const HandleIncriment = (item) => {
                 </p>
               </div>
               <Flex className={"items-center gap-x-6"}>
-                <div className="flex items-center gap-x-3">
+                {/* <div className="flex items-center gap-x-3">
                   <span
                     className="border-[1px] w-8 h-8 font-bold cursor-pointer text-center text-xl"
                     onClick={() => HandleDecriment(CartItem)}
                   >
                     -
                   </span>
+
                   <p className="font-Montserrat text-md">1</p>
+
                   <span
                     className="border-[1px] w-8 h-8 cursor-pointer text-center font-bold text-xl"
-                    onCanPlay={() => HandleIncriment(CartItem)}
+                    onClick={() => HandleIncriment(CartItem)}
                   >
                     +
                   </span>
-                </div>
+                </div> */}
                 <div>
                   <button
                     className="px-6 py-2 bg-CommonColor font-Montserrat text-white text-md font-light hover:bg-green-500"
@@ -232,9 +283,12 @@ const HandleIncriment = (item) => {
                 : "Desicription Missing"}
             </p>
           </div>
-          <div className="py-20">
-            <ProductComment />
-          </div>
+          {CartItem && (
+            <div className="py-20">
+              <ProductComment realtime={realtime} />
+            </div>
+          )}
+
           <div className="py-20">
             <div className="flex flex-col gap-y-4">
               <div>
@@ -245,8 +299,11 @@ const HandleIncriment = (item) => {
                   InputPlaceholder={"Enter your Name"}
                   InputId={"Name"}
                   InputClass={"border-b-[1px] w-96 py-1"}
+                  OnChangeItem={HandleChange}
+                  ValueForm={commentinput.Name}
                 />
               </div>
+
               <div>
                 <label
                   htmlFor="Messege"
@@ -259,12 +316,17 @@ const HandleIncriment = (item) => {
                     name="InputMessege"
                     id="InputMessege"
                     placeholder="Messege here"
-                    className="min-h-44 border-[1px] w-96"
+                    className="min-h-44 border-[1px] w-96 pl-3"
+                    onChange={HandleChange}
+                    value={commentinput.InputMessege}
                   ></textarea>
                 </div>
               </div>
               <div>
-                <button className="font-Montserrat font-bold bg-CommonColor px-4 py-2 text-white rounded-md">
+                <button
+                  className="font-Montserrat font-bold bg-CommonColor px-4 py-2 text-white rounded-md"
+                  onClick={HandlePost}
+                >
                   Add Comment
                 </button>
               </div>

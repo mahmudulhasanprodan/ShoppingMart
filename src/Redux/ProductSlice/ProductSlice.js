@@ -15,14 +15,15 @@ const initialState = {
 export const ProductSLice = createSlice({
   name: "counter",
   initialState,
-  reducers:{
-     ProductData: (state,action) => {   
-        state.CartItem = action.payload;       
-     },
-     Setstatus: (state,action) => {
-       state.Status = action.payload;        
-     }
-  }
+  reducers: {
+    ProductData: (state, action) => {
+      state.CartItem = action.payload;
+    },
+    Setstatus: (state, action) => {
+      state.Status = action.payload;
+    },
+    
+  },
 });
 
 // Writing The Thunk Function
@@ -42,6 +43,6 @@ export const FeatureProduct = (apiData) => {
    }
 };
 
-export const { ProductData,Setstatus } = ProductSLice.actions
+export const { ProductData,Setstatus,ProductIncrement} = ProductSLice.actions
 
 export default ProductSLice.reducer
